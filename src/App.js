@@ -19,6 +19,7 @@ class App extends Component {
                     element={<Dashboard />}
                   >
                     <Dashboard />
+                    
                   </Route>
 
                   <Route exact path="/signup" className="App-link"></Route>
