@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <div clasName="Todo-App">
+          <div clasName="payment-app">
             <BrowserRouter basename={""}>
               <div className="App">
                 <Switch>
@@ -19,6 +19,7 @@ class App extends Component {
                     element={<Dashboard />}
                   >
                     <Dashboard />
+                    
                     
                   </Route>
 
