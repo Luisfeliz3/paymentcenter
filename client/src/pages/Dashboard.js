@@ -17,11 +17,9 @@ import "./style.css";
 function Nav() {
 	return (
    <div className = "col-md-10 offset-md-1">
-     
      <Navbar/>
      <CardGroup/>
      <RecentActivity/>
-     
    </div>
 	);
 }

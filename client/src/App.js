@@ -13,8 +13,7 @@ class App extends Component {
               <div className="App">
                 <Switch>
                   <Route
-                    exact
-                    path="/"
+                    exact path="/"
                     className="App-link"
                     element={<Dashboard />}
                   >
