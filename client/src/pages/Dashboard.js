@@ -9,19 +9,18 @@ import React from "react";
 // import logo from "../../static/logo.png";
 // // Can change icon below to match explanation slide
 // import drop from "../../static/projects.png";
-import Navbar from "../components/Navbar";
+
 import CardGroup from "../components/CardGroup";
-import RecentActivity from "../components/RecentActivity";
+import RecentActivity from "../components/RecentActivity"; 
 import "./style.css";
 
-function Nav() {
+function Dashboard() {
 	return (
    <div className = "col-md-10 offset-md-1">
-     <Navbar/>
      <CardGroup/>
      <RecentActivity/>
    </div>
 	);
 }
 
-export default Nav;
+export default Dashboard;

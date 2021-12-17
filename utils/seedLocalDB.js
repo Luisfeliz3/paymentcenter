@@ -9,7 +9,7 @@ console.log(moment().add(10, 'days').format("MMM DD") );
 
 // const seed = require("./seedLocalDB");
 
-mongoose.connect(
+mongoose.createConnection(
 	// Name below is name of local (Robo3T)
 	process.env.MONGODB_URI || "mongodb://localhost/paymentcenter",
 	mongoOptions

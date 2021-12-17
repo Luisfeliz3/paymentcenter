@@ -32,7 +32,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
-function CustomizedTables(props) {
+function RecentActivity(props) {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -73,4 +73,4 @@ function CustomizedTables(props) {
   );
 }
 
-export default CustomizedTables;
+export default RecentActivity;

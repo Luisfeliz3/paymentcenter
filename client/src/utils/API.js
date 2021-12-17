@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default {
+export default  {
 	// New endpoint to get pricing from pricing collection
 	getTransactions: function () {
 		return axios.get("/api/transactions");

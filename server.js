@@ -11,7 +11,6 @@ const app = express();
 
 // Requiring passport as we've configured it
 // const passport = require("./utils/passport");
-
 const PORT = process.env.PORT || 3001;
 
 // logging (development)
@@ -33,9 +32,10 @@ app.use(session(sessionOptions));
 app.use(routes);
 
 // Connect to the Mongo DB
-// mongoose.createConnection(`mongodb+srv://user1:password1234@cluster0.k6ma6.mongodb.net/paymentcenter?retryWrites=true&w=majority`, mongoOptions);
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/paymentcenter", mongoOptions);
-var connection = mongoose.connection;
+
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/paymentcenter", mongoOptions);  // use ths to run locally
+mongoose.connect(process.env.MONGODB_URI || `mongodb+srv://user1:password1234@cluster0.k6ma6.mongodb.net/paymentcenter?retryWrites=true&w=majority`, mongoOptions); // use this to run from mongo atlas
+
 mongoose.connection.on('connected', ()=>{
   if (process.env.NODE_ENV === 'production') seed.seed();
   console.log('Mongoose is connected !')
@@ -43,11 +43,10 @@ mongoose.connection.on('connected', ()=>{
 
 
 
-if (process.env.NODE_ENV === 'production' ){
-
-  app.use(express.static('client/build'));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
 }
 // Start the API server
 app.listen(PORT, function () {
-	console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });

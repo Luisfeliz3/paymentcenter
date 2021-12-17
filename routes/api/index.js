@@ -4,7 +4,7 @@ const router = require("express").Router();
 const transactionRoutes = require("./transactions");
 
 
-// pricing routes
+// transaction routes
 router.use("/transactions", transactionRoutes);
 
 
