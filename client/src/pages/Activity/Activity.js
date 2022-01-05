@@ -1,12 +1,12 @@
 import React from "react";
-import RecentActivity from "../components/RecentActivity";
-import LeftNav from "../components/LeftNav";
+import RecentActivity from "../../components/RecentActivity";
+import LeftNav from "../../components/LeftNav";
 
 import "./style.css";
 
 function Activity() {
   return (
-  <div row-md-2>
+  <div>
       <LeftNav/>
     <div className="activity">
          

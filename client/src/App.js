@@ -1,29 +1,59 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Switch ,Redirect} from "react-router-dom"; //Redirect
-import Dashboard from "./pages/Dashboard";
-import Activity from "./pages/Activity";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Activity from "./pages/Activity/Activity";
 import Navbar from "./components/Navbar";
+import userAPI from "./utils/userAPI";
+import Login from "./pages/Login/Login"
+import Signup from "./pages/Signup/Signup"
+import ProtectedRoute from "./components/ProtectedRoute";
+
+
 import "./App.css";
 
-class App extends Component {
-  render() {
+function App () {
+
+	const [userState, setUserState] = useState({});
+
+ 	//user authentication
+   function authenticate() {
+		return userAPI
+			.authenticateUser()
+			.then(({ data }) => {
+				console.log("user:", data);
+				setUserState(data);
+			})
+			.catch((err) => console.log("registered user:", err.response));
+	}
     return (
       <div className="App">
         <header className="App-header">
           <div className="payment-app">
-            <BrowserRouter basename={""}>
+            <BrowserRouter>
               <div className="App">
-              <Navbar/>
+                <Navbar />
                 <Switch>
+                  <Route exact path="/" className="App-link">
+                    <Login userState={userState} setUserState={setUserState} />
+                  </Route>
                   <Route
-                    exact path="/"
+                    exact path="/dashboard"
                     className="App-link"
-                    component={Dashboard} 
-                  >
-                  
+                    component={Dashboard}
+                  ></Route>
+                  <Route exact path="/signup" className="App-link">
+                    <Signup
+                      authenticate={authenticate}
+                      user={userState}
+                    />
                   </Route>
                   <Route exact path="/signup" className="App-link"></Route>
-                  <Route exact path="/activity" className="App-link" component={Activity} ></Route>
+                  <ProtectedRoute
+                    exact
+                    path="/activity"
+                    className="App-link"
+                    component={Activity}
+                  ></ProtectedRoute>
                   <Route path="*" render={() => <Redirect to="/" />} />
                 </Switch>
               </div>
@@ -33,6 +63,6 @@ class App extends Component {
       </div>
     );
   }
-}
+
 
 export default App;

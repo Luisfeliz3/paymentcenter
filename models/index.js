@@ -1,4 +1,5 @@
 module.exports = {
-    Transactions: require("./Transactions")
+    Transactions: require("./Transactions"),
+    Users: require("./Users")
   };
   
