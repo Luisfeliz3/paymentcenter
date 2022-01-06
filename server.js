@@ -1,4 +1,5 @@
 const { mongoOptions, sessionOptions } = require("./utils/config");
+const passport = require("./utils/passport");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const express = require("express");
@@ -10,7 +11,7 @@ const app = express();
 
 
 // Requiring passport as we've configured it
-// const passport = require("./utils/passport");
+
 const PORT = process.env.PORT || 3001;
 
 // logging (development)
@@ -25,8 +26,8 @@ app.use(express.static("client/build"));
 
 // We need to use sessions to keep track of our user's login status
 app.use(session(sessionOptions));
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Add routes, both API and view
 app.use(routes);

@@ -5,7 +5,7 @@ const ProtectedRoute = ({ children }) => (
    <Route >
       {children.props._id
        ? children
-       : <Redirect to='/login' />}
+       : <Redirect to='/activity' />}
    </Route>
 )
  export default ProtectedRoute;

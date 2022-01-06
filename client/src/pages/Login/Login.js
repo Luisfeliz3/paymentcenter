@@ -14,15 +14,20 @@ function Login({ setState, setUserState }) {
 
   const handleInputChange = (event) => {
     event.preventDefault();
-    const { name, value } = event.target;
+    const { name, email } = event.target;
    
-    setState({
-      [name]: value,
-    });
+    setUser({
+        name: name,
+        user: email,
+      });
+    // setState({
+    //   [name]: value,
+    // });
   };
 
   const handleFormSubmit = (event) => {
-      
+    console.log(event.target.value);
+
     event.preventDefault();
     if (user.email && user.password) {
       userAPI
@@ -55,7 +60,7 @@ function Login({ setState, setUserState }) {
         Email
         <input 
           value={user.email}
-          onChange={handleInputChange}
+        //   onChange={(e)=>handleInputChange}
           name="email"
           placeholder="Email (required)"
           className="main-button"
@@ -66,7 +71,7 @@ function Login({ setState, setUserState }) {
         Password
         <input
           value={user.password}
-          onChange={handleInputChange}
+        //   onChange={(e)=>handleInputChange}
           name="password"
           placeholder="Password (required)"
           type="password"

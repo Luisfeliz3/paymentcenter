@@ -33,7 +33,7 @@ function App () {
               <div className="App">
                 <Navbar />
                 <Switch>
-                  <Route exact path="/" className="App-link">
+                  <Route exact path="/login" className="App-link">
                     <Login userState={userState} setUserState={setUserState} />
                   </Route>
                   <Route
@@ -49,14 +49,16 @@ function App () {
                   </Route>
                   <Route exact path="/signup" className="App-link"></Route>
                   <ProtectedRoute
-                    exact
-                    path="/activity"
-                    className="App-link"
-                    component={Activity}
-                  ></ProtectedRoute>
-                  <Route path="*" render={() => <Redirect to="/" />} />
+                    exact path="/activity"
+                    className="App-link"    
+                  
+                  >
+                    <Activity {...userState}/>
+                  </ProtectedRoute>
+               
                 </Switch>
               </div>
+			        {userState.email ? <Redirect to="/activity" /> : <></>}
             </BrowserRouter>
           </div>
         </header>
