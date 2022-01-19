@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import userAPI from "../..//utils/userAPI";
-// import { Link } from "react-router-dom";
-// import { Col, Row, Container } from "../components/Grid";
-// import { Input, FormBtn } from "../components/Form";
-// import "./style.css";
+
 
 function Login({ setState, setUserState }) {
   const [user, setUser] = useState({

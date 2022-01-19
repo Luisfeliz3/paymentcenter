@@ -40,6 +40,9 @@ function RecentActivity(props) {
       .then((res) => setRows(res))
       .catch((err) => console.log(err));
   }, []);
+
+
+  
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
