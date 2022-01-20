@@ -66,7 +66,10 @@ function Activity() {
             </div>
           </div>
         </div>
-
+        <div className="recent-pos col-md-8">
+        <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+    
         <TableHead>
           <TableRow>
             <StyledTableCell align="left">DATE</StyledTableCell>
@@ -75,7 +78,10 @@ function Activity() {
             <StyledTableCell align="left"></StyledTableCell>
           </TableRow>
         </TableHead>
-
+             
+      </Table>
+    </TableContainer>
+    </div>
         <div className="recent-pos col-md-8">
           {(transactions.data && transactions.data.length > 0 ? 
           transactions.data.length : 0) ? (

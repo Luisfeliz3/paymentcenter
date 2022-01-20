@@ -35,8 +35,8 @@ function RecentActivity(props) {
           <StyledTableCell component="th" scope="row">
             {data.date}
           </StyledTableCell>
-          <StyledTableCell align="left">{data.description}</StyledTableCell>
-          <StyledTableCell align="left">${data.amount}</StyledTableCell>
+          <StyledTableCell align="right">{data.description}</StyledTableCell>
+          <StyledTableCell align="right">${data.amount}</StyledTableCell>
         </StyledTableRow>
       </Table>
     </TableContainer>
