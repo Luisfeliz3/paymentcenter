@@ -7,6 +7,7 @@ import userAPI from "./utils/userAPI";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
+import API from "./utils/API";
 
 import "./App.css";
 
@@ -23,6 +24,7 @@ function App() {
       })
       .catch((err) => console.log("registered user:", err.response));
   }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -44,13 +46,9 @@ function App() {
                   <Signup authenticate={authenticate} user={userState} />
                 </Route>
                 <Route exact path="/signup" className="App-link"></Route>
-                <ProtectedRoute
-                  exact
-                  path="/activity"
-                  className="App-link"
-                >
+                <Route exact path="/activity" className="App-link">
                   <Activity {...userState} />
-                </ProtectedRoute>
+                </Route>
               </Switch>
             </div>
             {userState.email ? <Redirect to="/activity" /> : <></>}
