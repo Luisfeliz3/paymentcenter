@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import RecentActivity from "../RecentActivity";
+import ActivityTransactions from "../ActivityTransactions";
 
 function Pagination({ transactions, pageLimit, dataLimit }) {
   console.log(transactions.data);
@@ -18,7 +18,7 @@ function Pagination({ transactions, pageLimit, dataLimit }) {
   const changePage = (e) => {
     const pageNumber = Number(e.target.textContent);
     setCurrentPage(pageNumber);
-  };
+}
 
   const getPaginatedData = () => {
     const startIndex = currentPage * dataLimit - dataLimit;
@@ -36,7 +36,7 @@ function Pagination({ transactions, pageLimit, dataLimit }) {
       {/* show the posts, 10 posts at a time */}
       <div className="dataContainer">
         {getPaginatedData().map((d, idx) => (
-          <RecentActivity key={idx} data={d} />
+          <ActivityTransactions key={idx} data={d} />
         ))}
       </div>
 

@@ -9,18 +9,18 @@ function Login({ setState, setUserState }) {
   });
 // console.log(user);
 
-  const handleInputChange = (event) => {
-    event.preventDefault();
-    const { name, email } = event.target;
-   
-    setUser({
-        name: name,
-        user: email,
-      });
-    // setState({
-    //   [name]: value,
-    // });
-  };
+    // const handleInputChange = (event) => {
+    //   event.preventDefault();
+    //   const { name, email } = event.target;
+    
+    //   setUser({
+    //       name: name,
+    //       user: email,
+    //     });
+    //   // setState({
+    //   //   [name]: value,
+    //   // });
+    // };
 
   const handleFormSubmit = (event) => {
     console.log(event.target.value);

@@ -3,6 +3,12 @@
     margin-bottom: 1rem;
 }
 
+.card-group{
+
+    margin-bottom: 40px;
+}
+
+
 #sidebar{
     position: absolute;
     right: 1200px; 
