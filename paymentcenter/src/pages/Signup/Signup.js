@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import userAPI from "../../utils/userAPI";
-import {  Navigate, Link } from "react-router-dom";
+import {  Redirect, Link } from "react-router-dom";
 
 
 function Signup ({setState, authenticate}) {
@@ -33,7 +33,7 @@ function Signup ({setState, authenticate}) {
       .then(res => {
           if(res.status === 200 ){
             authenticate();
-            return <Navigate to="/" />
+            return <Redirect to="/" />
           }
         })
         .catch(err => console.log(err.response.data));

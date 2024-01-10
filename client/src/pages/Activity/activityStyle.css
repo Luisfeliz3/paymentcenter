@@ -1,0 +1,41 @@
+.actvity-card-group{
+  display: inline-flex;
+}
+
+.activity {
+ position: relative;
+  right: -440px;
+
+}
+
+.recent-pos{
+    position: relative;
+    right: -0px;  
+}
+
+.actvity-card.vital{
+  background-color: #fff;
+  margin :20px;
+  height: 250px;
+  width : 350px;
+  border-radius : 6px;
+
+}
+
+
+.actvity-card-title{
+  margin-top: 40px;
+  text-align: center;
+  font-size: 25px;
+}
+.actvity-card-text{
+  text-align: center;
+  font-size: 35px;
+
+}
+
+#recent-activity{
+  width: 65%;
+  margin-left: 27%;
+}
+

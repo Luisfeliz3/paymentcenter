@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"; //Navigate
+import { BrowserRouter, Route, Routes, Redirect } from "react-router-dom"; //Redirect
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Activity from "./pages/Activity/Activity";
 import Navbar from "./components/Navbar";
@@ -31,42 +31,29 @@ function App() {
             <div className="App">
               <Navbar />
               <Routes>
-                <Route exact path="/login" className="App-link" element={
+                <Route exact path="/login" className="App-link">
                   <Login userState={userState} setUserState={setUserState} />
-                }>
-
                 </Route>
                 <Route
                   exact
                   path="/dashboard"
                   className="App-link"
-                  element={<Dashboard/>}
+                  component={Dashboard}
                 ></Route>
-                <Route exact path="/signup" className="App-link"
-                element={<Signup authenticate={authenticate} user={userState} />}
-                >
-
+                <Route exact path="/signup" className="App-link">
+                  <Signup authenticate={authenticate} user={userState} />
                 </Route>
                 <Route exact path="/signup" className="App-link"></Route>
-                <Route
+                <ProtectedRoute
                   exact
                   path="/activity"
                   className="App-link"
-                  element={<Activity {...userState} />}
                 >
-
-                </Route>
-                <Route
-                  exact
-                  path="/activity"
-                  className="App-link"
-                  element={<Activity {...userState} />}
-                >
-                  
-                </Route>
+                  <Activity {...userState} />
+                </ProtectedRoute>
               </Routes>
             </div>
-            {userState.email ? <Navigate to="/activity" /> : <></>}
+            {userState.email ? <Redirect to="/activity" /> : <></>}
           </BrowserRouter>
         </div>
       </header>

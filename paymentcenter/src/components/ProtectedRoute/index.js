@@ -1,11 +1,11 @@
 import React from "react";
-import { Route, Navigate } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => (
    <Route >
       {children.props._id
        ? children
-       : <Navigate to='/activity' />}
+       : <Redirect to='/activity' />}
    </Route>
 )
  export default ProtectedRoute;
