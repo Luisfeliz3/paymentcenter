@@ -1,6 +1,6 @@
 import React from "react";
-import RecentActivity from "../../components/RecentActivity";
-import LeftNav from "../../components/LeftNav";
+import RecentActivity from "../../components/RecentActivity/RecentActivity";
+import LeftNav from "../../components/LeftNav/LeftNav";
 import ToolTip from "../../components/ToolTips";
 
 import "./activityStyle.css";

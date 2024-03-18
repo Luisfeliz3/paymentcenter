@@ -1,0 +1,76 @@
+.payment-card{
+    background-color: #fff;
+    display: block;
+    justify-self: center;
+    width: 70rem; /* 160px 20rem */
+    height:30rem; /* 160px */
+    margin: auto;
+    border-radius:10px;
+
+}
+
+.line-break{
+    border-top: 2px solid #bbb;
+  border-radius: 5px; 
+  margin-top: -25px;
+}
+
+.pay-title{
+    font-size: 30px;
+ padding: 20px 30px 30px 20px;
+}
+
+.pay-input{
+    height : 2.466rem;
+    margin: 30px;
+}
+
+
+
+
+.bank-acount-line-break{
+    border-top: 2px solid #bbb;
+  border-radius: 5px; 
+  margin-top: 25px;
+}
+
+
+.amount-line-break{
+    border-top: 2px solid #bbb;
+    border-radius: 5px; 
+    margin-top: 15px;
+}
+.term-conditions-line-break{
+    border-top: 2px solid #bbb;
+    border-radius: 5px; 
+    margin-top: 80px;
+}
+
+
+.bottom-section{
+    background-color: red;
+    display: flex;
+    width: 70rem; /* 160px 20rem */
+    height:25rem; /* 160px */
+    margin: auto;
+    border-radius:10px;
+
+}
+
+.payment-history{
+    background-color: pink;
+    width: 35rem; /* 160px 20rem */
+    height:30rem; /* 160px */
+    margin: auto;
+    border-radius:10px;
+
+}
+
+.useful-links{
+    background-color: burlywood;
+    width: 15rem; /* 160px 20rem */
+    height:30rem; /* 160px */
+    margin: auto;
+    border-radius:10px;
+
+}

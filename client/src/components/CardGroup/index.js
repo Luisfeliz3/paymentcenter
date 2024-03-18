@@ -1,8 +1,18 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import "./style.css";
 
 
-function CardGroup() {
+const CardGroup = () => {
+
+  const navigate = useNavigate();
+
+  const handleMakePayment = (e) => {
+    e.preventDefault();
+    navigate("/payment")
+
+  }
+
 	return (
 <div className="card-group">
   <div className="card">
@@ -18,7 +28,7 @@ function CardGroup() {
       <h5 className="card-title">Make A Payment</h5>
       <p className="card-text">Today</p>
       <p className="card-text"><small className="text-muted">Minimum Payment Due $40.00</small></p>
-      <button className="btn btn-outline-success" type="submit">Make a Payment</button>
+      <button className="btn btn-outline-success" type="submit" onClick={handleMakePayment}>Make a Payment</button>
     </div>
   </div>
   <div className="card">
@@ -31,6 +41,7 @@ function CardGroup() {
       href="#balancedetails">Balance Details</a>
     </div>
   </div>
+
 </div>
 	);
 }

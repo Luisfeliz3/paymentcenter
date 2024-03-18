@@ -1,22 +1,21 @@
-const { mongoOptions, sessionOptions } = require("./utils/config");
-const passport = require("./utils/passport");
-const session = require("express-session");
-const mongoose = require("mongoose");
-const express = require("express");
-const routes = require("./routes");
-const logger = require("morgan");
-const cors = require('cors')
+import express  from 'express';
+import mongoose from 'mongoose';
+import mongoOptions  from "./utils/config.js";
+// import  sessionOptions  from "./utils/config.js";
+import routes from "./routes/index.js";
 const app = express();
-const seed = require("./utils/seedLocalDB");
-
-
+import session  from 'express-session' 
 // Requiring passport as we've configured it
+import passport from "./utils/passport.js";
+import logger from "morgan";
+// import seed from "./utils/seedBaseDB.js";
+ 
 
 const PORT = process.env.PORT || 3001;
 
 // logging (development)
 app.use(logger("dev"));
-app.use(cors())
+
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -25,17 +24,28 @@ app.use(express.json());
 app.use(express.static("client/build"));
 
 // We need to use sessions to keep track of our user's login status
-app.use(session(sessionOptions));
+app.use(session({
+  secret: "keyboard cat",
+  name: "stats",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: 1000 * 60 * 60 * 24,
+  },
+}));
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Add routes, both API and view
 app.use(routes);
-
+mongodb://localhost:27017
 // Connect to the Mongo DB
-
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/paymentcenter", mongoOptions);  // use ths to run locally
-mongoose.connect(process.env.MONGODB_URI || `mongodb+srv://user1:password1234@cluster0.k6ma6.mongodb.net/paymentcenter?retryWrites=true&w=majority`); // use this to run from mongo atlas
+mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/paymentcenter", {
+    useUnifiedTopology: true ,
+  useNewUrlParser: true,
+});
 
 // mongoose.connection.on('connected', ()=>{
 //   if (process.env.NODE_ENV === 'production') seed.seed();
@@ -44,10 +54,11 @@ mongoose.connect(process.env.MONGODB_URI || `mongodb+srv://user1:password1234@cl
 
 
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
+// if (process.env.NODE_ENV === 'production' ){
+
+//   app.use(express.static('client/build'));
 // }
 // Start the API server
 app.listen(PORT, function () {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+	console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });

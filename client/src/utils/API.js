@@ -1,11 +1,20 @@
 import axios from "axios";
 
+
 export default  {
 	// New endpoint to get pricing from pricing collection
 	getTransactions: function () {
 		return axios.get("/api/transactions");
 	}
 
+}
+
+	// // New endpoint to get pricing from pricing collection
+	// 	 function getTransactions  () {
+	// 	return axios.get("/api/transactions");
+	// }
+     
+	// export default {getTransactions};
 	// // Saves the onChange params to the user collection
 	// saveDims: function (dimData) {
 	// 	return axios.post("/api/saveInput", dimData);
@@ -33,4 +42,4 @@ export default  {
 	// saveComment: function(commentData) {
 	//   return axios.post("/api/comments", commentData);
 	// },
-};
+

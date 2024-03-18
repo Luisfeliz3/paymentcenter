@@ -1,21 +1,35 @@
-const mongoose = require("mongoose");
-const db = require("../models");
-const { mongoOptions } = require("./config");
-
-const moment = require('moment')
+import mongoose from "mongoose";
+import db from "../models/index.js";
+import  mongoOptions  from "./config.js";
+import  moment from 'moment';
 
 console.log(moment().add(10, 'days').format("MMM DD") );
 
 
 // const seed = require("./seedLocalDB");
 
-mongoose.createConnection(
-	// Name below is name of local (Robo3T)
-	process.env.MONGODB_URI || "mongodb://localhost/paymentcenter",
-	mongoOptions
-);
+// mongoose.createConnection(
+// 	// Name below is name of local (Robo3T)
+// 	process.env.MONGODB_URI || "mongodb://localhost/paymentcenter",
+// 	{ 
+// 		useUnifiedTopology: true ,
+// 		useNewUrlParser: true
+// 	}
+// );
 
 
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/paymentcenter", {
+    useUnifiedTopology: true ,
+  useNewUrlParser: true,
+});
+let userSeed = [
+	{
+		username: "testUser",
+		email: "email@email.com",
+		password: "testPassword",
+	
+	}]
 
 let transactions = [
 	{
@@ -78,13 +92,30 @@ let transactions = [
 		description: "Pizerria Pizza",
 		amount: "5.38",
 	},
+	{
+		date: moment().add(56, 'days').format("MMM DD") ,
+		description: "TRAVELOCITY",
+		amount: "500.38",
+	},
 ];
 
 setTimeout(function () {
 	process.exit(0);
 }, 5000);
 
+
+
 const seed = function () {
+
+	db.Users.deleteMany({})
+	.then(() => db.Users.create(userSeed))
+	.then((data) => {
+		console.log(data.length + " records inserted!");
+	})
+	.catch((err) => {
+		console.error(err);
+	});
+
 	db.Transactions.deleteMany({})
 		.then(() => db.Transactions.create(transactions))
 		.then((data) => {
@@ -97,4 +128,5 @@ const seed = function () {
 };
 seed();
 
-module.exports = { seed };
+
+export default  seed ;

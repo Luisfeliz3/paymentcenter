@@ -1,12 +1,12 @@
-const router = require("express").Router();
-const transactionsController = require("../../controllers/transactionsController");
-const passport = require("../../utils/passport");
+// const router = require("express").Router();
+import {Router} from "express";
+//  const transactionsController = require("../../controllers/transactionsController");
+import  transactionsController from "../../controllers/transactionsController.js";
+// import passport from "../../utils/passport";
 
-
+const router = Router();
 // Matches with "/api/transactions" from API.js
-router.route("/")
-    .get(transactionsController.findAll);
+router.route("/").get(transactionsController.findAll);
 
 
-
-module.exports = router;
+export default router ;

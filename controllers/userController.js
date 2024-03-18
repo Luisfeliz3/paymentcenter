@@ -1,16 +1,17 @@
-const db = require("../models");
+import  db from "../models/index.js";
 
 
 // Defining methods for the userController
-module.exports = {
+export default  {
 
    login: function(req, res) {
       // Sending back a password, even a hashed password, isn't a good idea
+      console.log(req.user + "GETTING THAT USER")
       res.json({
          _id: req.user._id,
          username: req.user.username,
          email: req.user.email,
-         // comments: req.user.comments
+ 
       });
    },
 
@@ -19,7 +20,7 @@ module.exports = {
 	// otherwise send back an error
    signup: function (req, res) {
 		db.Users.create({
-		// db.User.insertOne({
+		 
          username: req.body.username,
 			email: req.body.email,
          password: req.body.password,
