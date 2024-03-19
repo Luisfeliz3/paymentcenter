@@ -5,7 +5,7 @@ import "./style.css";
 
 function Dashboard() {
 	return (
-   <div className = "col-md-10 offset-md-1">
+   <div>
      <CardGroup/>
      <RecentActivity/>
    </div>

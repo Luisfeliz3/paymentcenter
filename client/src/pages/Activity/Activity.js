@@ -9,6 +9,9 @@ function Activity() {
   return (
   <div>
       <LeftNav/>
+
+   
+
     <div className="activity">
          
       <div className="actvity-card-group col-md-8">

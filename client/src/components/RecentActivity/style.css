@@ -1,0 +1,17 @@
+.recent-activity-table{
+    position: relative;
+    background-color: #fff;
+    top:40px;
+    /* border-radius: 20px; */
+    
+}
+
+div.MuiDataGrid-cellContent{
+
+        --bs-text-opacity: 1;
+    color: #6c757d !important;
+}
+div.MuiDataGrid-columnHeaderTitle{
+    font-weight: bold;
+    
+}

@@ -1,5 +1,9 @@
 .actvity-card-group{
+  position :relative;
   display: inline-flex;
+  width :733px;
+  bottom: 583px;
+  right :220px;
 }
 
 .activity {
@@ -15,10 +19,10 @@
 
 .actvity-card.vital{
   background-color: #fff;
-  margin :20px;
+  
   height: 250px;
   width : 350px;
-  border-radius : 6px;
+  
 
 }
 
@@ -35,7 +39,10 @@
 }
 
 #recent-activity{
+  position: relative;
   width: 65%;
-  margin-left: 27%;
+  bottom: 600px;
+  left: 221px;
+
 }
 

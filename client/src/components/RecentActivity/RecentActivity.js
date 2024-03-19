@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import API from "../../utils/API.js";
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import './style.css'
 
 function RecentActivity(props) {
   const [rows, setRows] = useState([]);
@@ -51,8 +52,10 @@ function RecentActivity(props) {
   const row = [];
 
   return (
-    <div style={{ height: 400, width: "40%" }}>
+    <div >
+          <div  style={{ height: 400, width: "533px" }} className="recent-activity-table">
       <DataGrid
+      
         rows={row}
         columns={columns}
         initialState={{
@@ -71,6 +74,7 @@ function RecentActivity(props) {
             console.log(item);
           })
         : null}
+    </div>
     </div>
   );
 }

@@ -42,21 +42,21 @@ console.log(formData.email, formData.password);
   };
 
   return (
-    <div className="wrapper">
+    <div >
    
       <div id="sidebar">
         <div className="sidebar-header">
           <h3>User Login</h3>
         </div>
 
-        <form className="main"  onSubmit={handleFormSubmit}>
+        <form onSubmit={handleFormSubmit}>
           Email
           <input
             value={formData.email}
             type="email"
             name="email"
             placeholder="Email (required)"
-            className="main-button"
+            
             onChange={handleInputChange}
           />
           Password
@@ -65,17 +65,17 @@ console.log(formData.email, formData.password);
             name="password"
             placeholder="Password (required)"
             type="password"
-            className="main-button"
+           
             onChange={handleInputChange}
           />
           <button
             disabled={!(formData.email && formData.password)}
-            className="main-button"
+            
           >
             Log in
           </button>
           <Link to="/signup">
-            <button className="main-button"> Signup </button>
+            <button> Signup </button>
           </Link>
         </form>
       </div>
