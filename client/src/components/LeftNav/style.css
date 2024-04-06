@@ -4,7 +4,7 @@
     position: relative;
     top: -25px;
     padding: 1rem;
-    left: -50px;
+    left: -130px;
 }
 
 
@@ -52,6 +52,7 @@ a:focus {
 #sidebar .sidebar-header {
     padding: 20px;
     background: #6d7fcc;
+ 
 }
 
 #sidebar ul.components {
@@ -122,34 +123,7 @@ a.article:hover {
     color: #fff !important;
 }
 
-/* ---------------------------------------------------
-    CONTENT STYLE
------------------------------------------------------ */
-
-#content {
-    width: 100%;
-    padding: 20px;
-    min-height: 100vh;
-    transition: all 0.3s;
-}
-
-/* ---------------------------------------------------
-    MEDIAQUERIES
------------------------------------------------------ */
-
-@media (max-width: 768px) {
-    #sidebar {
-        margin-left: -250px;
-    }
-    #sidebar.active {
-        margin-left: 0;
-    }
-    #sidebarCollapse span {
-        display: none;
-    }
-}
-
-
-TableContainer{
-    margin-top: 170px;
-}
+ .sidebar-title{
+    font-size: 20px;
+    
+ }

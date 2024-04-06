@@ -1,14 +1,22 @@
+.activity-container{
+  position: relative;
+  top: 43px;
+
+}
+
 .actvity-card-group{
   position :relative;
   display: inline-flex;
   width :733px;
+ 
   bottom: 583px;
-  right :220px;
+  right: 300px;
 }
 
 .activity {
  position: relative;
   right: -440px;
+  width: 20px;
 
 }
 
@@ -20,9 +28,40 @@
 .actvity-card.vital{
   background-color: #fff;
   
-  height: 250px;
+  height: 120px;
   width : 350px;
-  
+ 
+
+}
+
+.actvity-card-split{
+  position: relative;
+  background-color: #fff;
+  bottom :582px;
+  height: 120px;
+  width: 733px;
+  left :140px;
+
+}
+
+.actvity-dl-statement{
+  position: relative;
+  background-color: #fff;
+  bottom :581px;
+  height: 60px;
+  width: 733px;
+  left :140px;
+
+}
+
+.actvity-card-spend{
+  position: relative;
+  background-color: #fff;
+ 
+  bottom :575px;
+  height: 150px;
+  width: 733px;
+  left :140px;
 
 }
 
@@ -30,11 +69,16 @@
 .actvity-card-title{
   margin-top: 40px;
   text-align: center;
-  font-size: 25px;
+  font-size: 15px;
+  position: relative;
+  top: -41px;
 }
 .actvity-card-text{
+  position: relative;
   text-align: center;
-  font-size: 35px;
+  font-size: 30px;
+  color: black;
+  top: -36px;
 
 }
 
@@ -42,7 +86,14 @@
   position: relative;
   width: 65%;
   bottom: 600px;
-  left: 221px;
+  left: 140px;
 
 }
 
+.charges-tooltip{
+  position: relative;
+  left: 76px;
+    top:15px;
+}
+
+ 

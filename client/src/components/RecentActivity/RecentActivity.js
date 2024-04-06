@@ -4,7 +4,8 @@ import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import './style.css'
 
-function RecentActivity(props) {
+function RecentActivity({width, top}) {
+   
   const [rows, setRows] = useState([]);
   const [trsx, setTrsx] = useState([]);
 
@@ -16,8 +17,8 @@ function RecentActivity(props) {
 
   const columns = [
     // { field: 'id', headerName: ' ', width: 70 },  /**hidden to not show the id value */
-    { field: "date", headerName: "DATE", width: 130 },
-    { field: "description", headerName: "DESCRIPTION", width: 130 },
+    { field: "date", headerName: "DATE", width: 230 },
+    { field: "description", headerName: "DESCRIPTION", width: 300 },
     { field: "amount", headerName: "AMOUNT", width: 130 },
     // {
     //   field: 'age',
@@ -50,10 +51,12 @@ function RecentActivity(props) {
   // ];
 
   const row = [];
+ 
 
   return (
     <div >
-          <div  style={{ height: 400, width: "533px" }} className="recent-activity-table">
+          <div  style={{ height: 400, width: `${width}px` , top:`${top}px`}} className="recent-activity-table">
+     
       <DataGrid
       
         rows={row}

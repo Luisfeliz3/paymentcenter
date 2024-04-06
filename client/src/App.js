@@ -33,11 +33,12 @@ function App() {
   };
 
   return (
-    <div>
-      <div  >
+    <div>   
+      <Navbar/>
+      <div>
         <BrowserRouter>
           <div>
-            <Navbar />
+         
             <Routes>
               <Route
                 exact

@@ -15,7 +15,7 @@ const CardGroup = () => {
 
 	return (
 <div className="card-group">
-  <div className="card">
+  <div className="card statement">
     <div className="card-body">
       <h5 className="card-title">Statement Balance</h5>
       <p className="card-text">$834.10</p>
@@ -23,7 +23,7 @@ const CardGroup = () => {
       <a className="btn btn-outline-success" href="/activity">View Transactions</a>
     </div>
   </div>
-  <div className="card">
+  <div className="card payment">
     <div className="card-body">
       <h5 className="card-title">Make A Payment</h5>
       <p className="card-text">Today</p>
@@ -31,7 +31,7 @@ const CardGroup = () => {
       <button className="btn btn-outline-success" type="submit" onClick={handleMakePayment}>Make a Payment</button>
     </div>
   </div>
-  <div className="card">
+  <div className="card balance">
     <div className="card-body">
       <h5 className="card-title">Total Balance</h5>
       <p className="card-text">$834.10</p>

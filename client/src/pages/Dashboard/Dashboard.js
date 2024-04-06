@@ -7,7 +7,17 @@ function Dashboard() {
 	return (
    <div>
      <CardGroup/>
-     <RecentActivity/>
+    
+     <RecentActivity
+     width={840}
+     top={70} 
+     />
+    
+    <div className="recent-activity-trsx-header">
+
+    Recent Transactions (Since Mar 15. Closing Apr 12)    All Transactions
+</div>
+   
    </div>
 	);
 }

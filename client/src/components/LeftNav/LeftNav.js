@@ -8,7 +8,7 @@ function LeftNav() {
         {/* <!-- Sidebar  --> */}
         <nav id="sidebar">
             <div className="sidebar-header">
-                <h3>Payment Center</h3>
+                <h3 className="sidebar-title">Payment Center</h3>
             </div>
 
             <ul className="list-unstyled components">

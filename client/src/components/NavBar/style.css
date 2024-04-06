@@ -1,4 +1,7 @@
 .navbar {
+    position: relative;
+    width: 1663px;
+    left: -415px;
     padding: 15px 10px;
     background: #fff;
     border: none;

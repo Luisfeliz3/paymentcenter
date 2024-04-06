@@ -18,7 +18,7 @@ function Nav() {
             <a className="nav-link" href="#accountservices">Account Services</a>
           </li>
         </ul>
-        <a className="nav-link" href="#accountservices">Help</a>
+        <a className="nav-link help" href="#accountservices">Help</a>
           <a className="btn btn-outline-success" href="/login" type="submit">Log In</a>
       </div>
     </div>
