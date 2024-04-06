@@ -31,6 +31,20 @@ let userSeed = [
 	
 	}]
 
+let balances = [
+
+	{	
+		statement_balance : 834.10,
+		minimum_payment : 40.00,
+		total_balance : 834.10,
+		pending_charges : 400.00,
+		posted_charges : 40.00,
+		remaining_statement_balance : 400.00,
+		available_credit : 10205.00
+	}
+
+]
+
 let transactions = [
 	{
 		date: moment().add(0, 'days').format("MMM DD") ,
@@ -110,7 +124,7 @@ const seed = function () {
 	db.Users.deleteMany({})
 	.then(() => db.Users.create(userSeed))
 	.then((data) => {
-		console.log(data.length + " records inserted!");
+		console.log(data.length + " User records inserted!");
 	})
 	.catch((err) => {
 		console.error(err);
@@ -119,7 +133,16 @@ const seed = function () {
 	db.Transactions.deleteMany({})
 		.then(() => db.Transactions.create(transactions))
 		.then((data) => {
-			console.log(data.length + " records inserted!");
+			console.log(data.length + "Transaction records inserted!");
+		})
+		.catch((err) => {
+			console.error(err);
+		});
+
+		db.Balances.deleteMany({})
+		.then(() => db.Balances.create(balances))
+		.then((data) => {
+			console.log(data.length + " Balance records inserted!");
 		})
 		.catch((err) => {
 			console.error(err);

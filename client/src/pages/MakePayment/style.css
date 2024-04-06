@@ -1,76 +1,153 @@
-.payment-card{
+
+.payment-title{
+    position:relative;
     background-color: #fff;
-    display: block;
-    justify-self: center;
-    width: 70rem; /* 160px 20rem */
-    height:30rem; /* 160px */
-    margin: auto;
-    border-radius:10px;
-
-}
-
-.line-break{
-    border-top: 2px solid #bbb;
-  border-radius: 5px; 
-  margin-top: -25px;
-}
-
-.pay-title{
     font-size: 30px;
- padding: 20px 30px 30px 20px;
+    height: 60px;
+    width : 800px; 
 }
 
-.pay-input{
-    height : 2.466rem;
-    margin: 30px;
+.pay-title-label{
+    position:relative;
+    left: 23px;
+    top: 7px;  
+}
+.pay-message-label{
+    position:relative;
+    left: 30px;
+    top: 7px;  
 }
 
-
-
-
-.bank-acount-line-break{
-    border-top: 2px solid #bbb;
-  border-radius: 5px; 
-  margin-top: 25px;
-}
-
-
-.amount-line-break{
-    border-top: 2px solid #bbb;
-    border-radius: 5px; 
-    margin-top: 15px;
-}
-.term-conditions-line-break{
-    border-top: 2px solid #bbb;
-    border-radius: 5px; 
-    margin-top: 80px;
-}
-
-
-.bottom-section{
-    background-color: red;
+.payment-message{
+    position:relative;
+    top: 1px;
     display: flex;
-    width: 70rem; /* 160px 20rem */
-    height:25rem; /* 160px */
-    margin: auto;
-    border-radius:10px;
+    background-color: #fff;
+    height: 40px;
+    width : 800px;
+}
+
+.payment-method{
+    position:relative;
+    background-color: #fff;
+    top: 2px;
+    height: 420px;
+    width : 800px;
+   
+
+}
+.payment-icon{
+    position:relative;
+    width:20px;
+    height: 20px;
+    top: 6px;
+    left: 23px;
+    color :green;
+}
+
+.payment-method-title{
+    position:relative;
+    width:120px;
+    height: 20px;
+    top: 20px;
+    left: 23px;
+    font-weight: bold;
+  
+}
+.payment-entity-label{
+    position:relative;
+    width:420px;
+    height: 20px;
+    top: 30px;
+    left: 23px;
+  
+  
+}
+
+.payment-amount-title{
+    position:relative;
+    width:120px;
+    height: 20px;
+    top: 50px;
+    left: 23px;
+    font-weight: bold;
+}
+
+.form{
+    position:relative;   
+    top: 60px;
+    left: 30px;
+
+    width: 300px;
+}
+
+.payment-form{
+    position:relative;
+    width: 300px;
+    display: grid;
 
 }
 
-.payment-history{
-    background-color: pink;
-    width: 35rem; /* 160px 20rem */
-    height:30rem; /* 160px */
-    margin: auto;
-    border-radius:10px;
+input[type='radio'] {
+    height: 25px;
+    width: 25px;
+    vertical-align: middle;
+  }
 
-}
+  .other-input{
+    width :400px
+  }
 
-.useful-links{
-    background-color: burlywood;
-    width: 15rem; /* 160px 20rem */
-    height:30rem; /* 160px */
-    margin: auto;
-    border-radius:10px;
+  .pay-now{
+    position:relative;
+    left: 158px;
+    top: 111px;
+  }
 
-}
+  .remaining{
+    position:relative;
+    top: 20px;
+  }
+  .remaining-label{
+    position:relative;
+    top: 20px;
+  }
+
+  .total{
+    position:relative;
+    top: 40px;
+  }
+  .total-label{
+    position:relative;
+    top: 40px;
+  }
+
+  .other-input{
+    position:relative;
+    top: 60px;
+  }
+
+  .other-amount-input{
+    position:relative;
+    top: 1px;
+
+    left : 275px;
+  }
+  .minimum-amount-label{
+    position:relative;
+    top: 1px;
+
+    left : 203px;
+  }
+  .remaining-amount-label{
+    position:relative;
+    top: 1px;
+
+    left : 144px;
+  }
+  .total-amount-label{
+    position:relative;
+    top: 1px;
+
+    left : 279px;
+  }

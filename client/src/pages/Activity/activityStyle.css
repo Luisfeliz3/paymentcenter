@@ -37,21 +37,59 @@
 .actvity-card-split{
   position: relative;
   background-color: #fff;
+  display:inline-grid;
   bottom :582px;
   height: 120px;
   width: 733px;
   left :140px;
+}
+
+.split-label{
+  position: relative;
+  margin: auto;
+  bottom: 15px;
 
 }
+.split-terms{
+  position: relative;
+  margin: auto;
+  bottom: 20px;
+  right: 25px;
+}
+.split-icon{
+  position: relative;
+ width : 30px;
+ top: 33px;
+ left: 20px;
+
+ color : #0d6efd;
+
+}
+
 
 .actvity-dl-statement{
   position: relative;
   background-color: #fff;
+  display:inline-grid;
   bottom :581px;
   height: 60px;
   width: 733px;
   left :140px;
+}
 
+.statement-icon{
+  position: relative;
+    margin :auto;
+    color : #0d6efd;
+    right: 20px;
+
+}
+.statement-label{
+  position: relative;
+    margin :auto;
+    right: 0px;
+
+ 
 }
 
 .actvity-card-spend{

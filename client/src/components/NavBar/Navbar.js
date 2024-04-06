@@ -19,7 +19,7 @@ function Nav() {
           </li>
         </ul>
         <a className="nav-link help" href="#accountservices">Help</a>
-          <a className="btn btn-outline-success" href="/login" type="submit">Log In</a>
+          <a className="btn btn-outline-primary" href="/login" type="submit">Log In</a>
       </div>
     </div>
   </nav>

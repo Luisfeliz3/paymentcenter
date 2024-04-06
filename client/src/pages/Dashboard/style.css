@@ -8,3 +8,19 @@
     width: 840px;
      
 }
+
+
+.trsx-label{
+
+    position: relative;
+    left: 20px;
+    top: 12px;
+
+
+}
+
+.trsx-date{
+    font-weight:bold;
+
+    color: #0d6efd;
+}

@@ -12,7 +12,8 @@ function LeftNav() {
             </div>
 
             <ul className="list-unstyled components">
-                <p>Recent Activity</p>
+                
+                <a href="/dashboard"><p>Recent Activity</p></a>
                 <li className="active">
                     <a href="/homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Previous Billing Periods</a>
                     <ul className="collapse list-unstyled" id="homeSubmenu">
@@ -28,11 +29,11 @@ function LeftNav() {
                     </ul>
                 </li>
                 <li>
-                    <a href="/">About</a>
+                    <a href="/">Disputes</a>
                 </li>
                 <li>
-                    <a href="/" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">View By Year</a>
-                    <ul className="collapse list-unstyled" id="pageSubmenu">
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Pages</a>
+<ul className="collapse list-unstyled" id="pageSubmenu">
                         <li>
                             <a href="/">Page 1</a>
                         </li>
@@ -45,7 +46,7 @@ function LeftNav() {
                     </ul>
                 </li>
                 <li>
-                    <a href="/">Portfolio</a>
+                    <a href="/">Account Management</a>
                 </li>
                 <li>
                     <a href="/">PDF Billing Statements</a>

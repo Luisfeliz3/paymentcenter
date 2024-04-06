@@ -5,6 +5,9 @@ export default  {
 	// New endpoint to get pricing from pricing collection
 	getTransactions: function () {
 		return axios.get("/api/transactions");
+	},
+	getBalances: function () {
+		return axios.get("/api/balances");
 	}
 
 }
