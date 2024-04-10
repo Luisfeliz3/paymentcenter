@@ -7,6 +7,10 @@ import  balancesController from "../../controllers/balancesController.js";
 const router = Router();
 // Matches with "/api/balances" from API.js
 router.route("/").get(balancesController.findAll);
+router.route("/makepayment").post((req, res) => {
+    res.send(JSON.stringify('hello'))
+
+});
 
 
 export default router ;
