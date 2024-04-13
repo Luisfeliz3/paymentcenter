@@ -11,7 +11,9 @@ import logger from "morgan";
 // import seed from "./utils/seedBaseDB.js";
  import cors from "cors"
  import bodyParser from 'body-parser';
+ import path from "path";
 
+ app.use(express.static(path.join(__dirname, "build"))); // put this line of code in app.js
 const PORT = process.env.PORT || 3001;
 
 // logging (development)
