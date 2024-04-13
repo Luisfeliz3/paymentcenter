@@ -5,8 +5,9 @@ import { FaCircleCheck } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import API from "../../utils/API.js";
 import Loading from "../../components/Loading/Loading.js";
-import { CurrencyInput, Currencies, Locales } from "input-currency-react";
+import { Currencies, Locales } from "input-currency-react";
 import MyCustomCurrencyInput from "../../components/CurrencyInput/CurrencyInput.js";
+ 
  
  
 
@@ -33,7 +34,7 @@ import MyCustomCurrencyInput from "../../components/CurrencyInput/CurrencyInput.
 
 
   const handleOnChange =   async ( e) => {
-  e.persist();
+  e.preventDefault();
  
  
   const  { name, value } =  e.target;

@@ -10,17 +10,16 @@ import passport from "./utils/passport.js";
 import logger from "morgan";
 // import seed from "./utils/seedBaseDB.js";
  import cors from "cors"
- import bodyParser from 'body-parser';
-//  import path from "path";
-
-//  app.use(express.static(path.join(__dirname, "build"))); // put this line of code in app.js
+ 
+// import path from 'path';
+// app.use(express.static(path.join(__dirname, 'build')));
 const PORT = process.env.PORT || 3001;
 
 // logging (development)
 app.use(logger("dev"));
 app.use(cors());
 // Define middleware here
-app.use(bodyParser.json({ type: 'application/*+json' }))
+ 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

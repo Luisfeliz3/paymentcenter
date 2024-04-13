@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "type": "module",
-  "proxy": "https://www.yourwebsitename.com",
+  "proxy": "https://paymentcenter-wzyo.onrender.com",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
@@ -13,9 +13,7 @@
     "seed": "node utils/seedLocalDB.js",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run install-client && npm run build",
-    "dev": "nodemon server.js",
-    "prod": "NODE_ENV=production nodemon server.js"
+    "heroku-postbuild": "npm run install-client && npm run build"
   },
   "author": "",
   "license": "ISC",
