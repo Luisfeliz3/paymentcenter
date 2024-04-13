@@ -3,12 +3,18 @@ import axios from "axios";
 
 export default  {
 	// New endpoint to get pricing from pricing collection
-	getTransactions: function () {
-		return axios.get("/api/transactions");
+	getTransactions: async  () =>{
+		return await axios.get("/api/transactions");
 	},
-	getBalances: function () {
-		return axios.get("/api/balances");
-	}
+	getBalances: async  () =>{
+		return await axios.get("/api/balances");
+	},
+	minPayment:  async  ( data) => {
+        // console.log(data.remaining_statement_balance)
+ 		// return axios.get(`/api/balances/${data.id}/${data.remaining_statement_balance}`);
+ 		return  await axios.post("/api/balances" , data );
+  
+	  },
 
 }
 

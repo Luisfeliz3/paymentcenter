@@ -9,14 +9,16 @@ import session  from 'express-session'
 import passport from "./utils/passport.js";
 import logger from "morgan";
 // import seed from "./utils/seedBaseDB.js";
- 
+ import cors from "cors"
+ import bodyParser from 'body-parser';
 
 const PORT = process.env.PORT || 3001;
 
 // logging (development)
 app.use(logger("dev"));
-
+app.use(cors());
 // Define middleware here
+app.use(bodyParser.json({ type: 'application/*+json' }))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -34,7 +36,7 @@ app.use(session({
   },
 }));
 
-
+ 
 app.use(passport.initialize());
 app.use(passport.session());
 

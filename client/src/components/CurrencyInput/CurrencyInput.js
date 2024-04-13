@@ -7,7 +7,7 @@ import React from 'react'
 
   const MyCustomCurrencyInput = (props) => {
     const { value, options, onChangeEvent, ...otherProps } = props;
-
+ 
     // You would need to provide your own implementation for `useCurrencyFormat` hook
     // assuming it returns the necessary values.
     const [

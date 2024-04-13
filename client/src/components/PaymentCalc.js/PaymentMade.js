@@ -1,9 +1,12 @@
-import React from 'react';
+import React from 'react'
 import { useState, useEffect } from "react";
+import API from "../../utils/API.js";
+import Loading from "../../components/Loading/Loading.js";
+const PaymentMade = ({payment}) => {
 
-const MakePayment = () => {
+
     const [balances, setBalances] = useState();
-
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,4 +27,4 @@ const MakePayment = () => {
   )
 }
 
-export default MakePayment
+export default PaymentMade

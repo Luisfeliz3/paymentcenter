@@ -34,13 +34,13 @@ let userSeed = [
 let balances = [
 
 	{	
-		statement_balance : 834.10,
+		statement_balance : 834.55,
 		minimum_payment : 40.00,
-		total_balance : 834.10,
-		pending_charges : 400.00,
+		total_balance : 834.55,
+		pending_charges : 400.65,
 		posted_charges : 40.00,
-		remaining_statement_balance : 400.00,
-		available_credit : 10205.00
+		remaining_statement_balance : 100.85,
+		available_credit : 10205.56
 	}
 
 ]

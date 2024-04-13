@@ -25,7 +25,7 @@ function App() {
   const authenticate = async () => {
     try {
       const { data } = await userAPI.authenticateUser();
-      console.log("user:", data);
+      // console.log("user:", data);
       setUserState(data);
     } catch (err) {
       return console.log("registered user:", err.response);
