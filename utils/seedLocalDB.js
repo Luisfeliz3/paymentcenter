@@ -8,21 +8,14 @@ console.log(moment().add(10, 'days').format("MMM DD") );
 
 // const seed = require("./seedLocalDB");
 
-// mongoose.createConnection(
-// 	// Name below is name of local (Robo3T)
-// 	process.env.MONGODB_URI || "mongodb://localhost/paymentcenter",
-// 	{ 
-// 		useUnifiedTopology: true ,
-// 		useNewUrlParser: true
-// 	}
-// );
-
-
+ 
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/paymentcenter", {
     useUnifiedTopology: true ,
   useNewUrlParser: true,
 });
+
+
 let userSeed = [
 	{
 		username: "testUser",

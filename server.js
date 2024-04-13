@@ -11,9 +11,9 @@ import logger from "morgan";
 // import seed from "./utils/seedBaseDB.js";
  import cors from "cors"
  import bodyParser from 'body-parser';
- import path from "path";
+//  import path from "path";
 
- app.use(express.static(path.join(__dirname, "build"))); // put this line of code in app.js
+//  app.use(express.static(path.join(__dirname, "build"))); // put this line of code in app.js
 const PORT = process.env.PORT || 3001;
 
 // logging (development)
@@ -51,17 +51,17 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/paymentce
   useNewUrlParser: true,
 });
 
-// mongoose.connection.on('connected', ()=>{
-//   if (process.env.NODE_ENV === 'production') seed.seed();
-//   console.log('Mongoose is connected !')
-// })
+mongoose.connection.on('connected', ()=>{
+  if (process.env.NODE_ENV === 'production') seed.seed();
+  console.log('Mongoose is connected !')
+})
 
 
 
-// if (process.env.NODE_ENV === 'production' ){
+if (process.env.NODE_ENV === 'production' ){
 
-//   app.use(express.static('client/build'));
-// }
+  app.use(express.static('client/build'));
+}
 // Start the API server
 app.listen(PORT, function () {
 	console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
