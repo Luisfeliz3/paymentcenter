@@ -151,3 +151,21 @@ input[type='radio'] {
 
     left : 279px;
   }
+
+  .dollar-input-container {
+  position: relative;
+  top: 20px;
+
+}
+
+.dollar-sign {
+  position: absolute;
+  left: 8px; /* Adjust this value as needed to position the dollar sign */
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Ensure the dollar sign does not interfere with input events */
+}
+
+.dollar-input {
+  padding-left: 20px; /* Adjust this value to ensure the text doesn't overlap with the dollar sign */
+}
