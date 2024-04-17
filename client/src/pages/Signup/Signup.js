@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import userAPI from "../../utils/userAPI";
 import {  Navigate, Link } from "react-router-dom";
+import "./styles.css"
+
+ 
 
 
 function Signup ({setState, authenticate}) {
@@ -42,18 +45,28 @@ function Signup ({setState, authenticate}) {
 
  
     return (
-            <form>
+
+
+      <div>
+      <div id="signup">
+        <div className=" signup-header">
+          <h3 className=" header-title">Sign Up to Login</h3>
+        </div>
+        <form className="signup-form" >
+          <div className="input-container">
               <input
                 value={user.username}
                 onChange={handleInputChange}
                 name="username"
                 placeholder="username (required)"
+                className="signup-username-input"
               />
               <input
                 value={user.email}
                 onChange={handleInputChange}
                 name="email"
                 placeholder="email (required)"
+                className="signup-email-input"
               />
               <input
                 value={user.password}
@@ -61,6 +74,7 @@ function Signup ({setState, authenticate}) {
                 name="password"
                 placeholder="(required)"
                 type="password"
+                className="signup-password-input"
               />
               <input
                 value={user.passwordConf}
@@ -68,18 +82,27 @@ function Signup ({setState, authenticate}) {
                 name="passwordConf"
                 placeholder="(required)"
                 type="password"
+                className="signup-confirm-password-input"
               />
-              
+              </div>
               <button
+              className="signup-signup-now btn btn-primary"
                 // disabled={!(this.state.email && this.state.password)}
                 onClick={handleFormSubmit}
               >
                 signup
               </button>
-              <a to="/">
-               <butoon> Login </butoon>
+              <a to="/login"
+              >
+               <button
+               className="signup-login-now btn btn-primary"
+               > Login </button>
              </a>
             </form>
+        </div>
+
+        </div>
+          
          
      
     );
@@ -87,3 +110,6 @@ function Signup ({setState, authenticate}) {
 
 
 export default Signup;
+
+
+ 

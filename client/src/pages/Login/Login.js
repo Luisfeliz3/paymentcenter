@@ -5,8 +5,8 @@ import "./styles.css"
 
 const Login = ({ authenticate, setUserState }) => {
   const [formData, setFormData] = useState({
-    email: " ",
-    password: " ",
+    email: "",
+    password: "",
   });
 
   const navigate = useNavigate();
@@ -74,13 +74,13 @@ const Login = ({ authenticate, setUserState }) => {
           />
          </div>
           <button 
-          className=" login-now btn btn-primary"
+          className="login-now btn btn-primary"
           disabled={!(formData.email && formData.password)}>
             Log in
           </button>
-          <Link to="/signup">
+          <Link to="/signup" className="signup-now btn btn-primary">
             <button
-            className=" signup-now btn btn-primary"
+            className="login-now{ btn btn-primary"
             > Signup </button>
           </Link>
         </form>

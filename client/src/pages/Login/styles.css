@@ -45,6 +45,8 @@
 .login-now{
     top: 20px;
     position: relative; 
+    left: 5px;
+
 }
 .signup-now{
     top: 20px;
@@ -54,13 +56,16 @@
 
 
 .login-form{
+    position: relative;
     width :300px;
+    top: 40px;
+
 }
 
 .login-iframe{
     position: relative;
     width:180px;
     left: 358px;
-    bottom: 156px;
+    bottom: 168px;
 
 }

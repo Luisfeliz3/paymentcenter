@@ -4,15 +4,14 @@ import { FaCircleCheck } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import API from "../../utils/API.js";
 import Loading from "../../components/Loading/Loading.js";
- 
 
 const MakePayment = () => {
   const [makePayments, setMakePayments] = useState();
   const [loading, setLoading] = useState(false);
-  const [selectedItems, setSelectedItems] = useState();
-  const isChecked = (value) => selectedItems === value;
-  const [formData, setFormData] = useState({ payment: 0.0 });
-  
+  const [selectedItems, setSelectedItems] = useState(" ");
+  const isChecked = async (value) => selectedItems === (await value);
+  const [formData, setFormData] = useState({ payment: "0.00" });
+  const [minimum, setMinimumPayment] = useState(0)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,40 +20,96 @@ const MakePayment = () => {
       setMakePayments(res.data);
       setLoading(false);
     };
-
     fetchData();
   }, []);
 
-  const handleOnChange = (event) => {
+  const handleOnChange = async (event) => {
+    event.preventDefault();
     const { name, value } = event.target;
-    console.log(name + value);
-    // Regular expression to allow only numbers and up to two decimal places
     const regex = /^\d*\.?\d{0,2}$/;
-    //create a validation if conditional here.
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-
+    if (
+      regex.test(value) ||
+      (await value) === "" ||
+      (await value) === "0.00" ||
+      (await name) === "option"
+    ) {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
     setSelectedItems(formData.option);
   };
 
   const handleSubmit = async (e) => {
+    console.log(formData);
     e.preventDefault();
-    await API.minPayment({
-      id: await makePayments[0]._id,
-      statement_balance: await makePayments[0].statement_balance,
-      minimum_payment:
-        (await makePayments[0].minimum_payment) - formData.payment,
-      total_balance: (await makePayments[0].total_balance) - formData.payment,
-      pending_charges: await makePayments[0].pending_charges,
-      posted_charges: await makePayments[0].posted_charges,
-      remaining_statement_balance: await makePayments[0]
-        .remaining_statement_balance,
-      available_credit: await makePayments[0].available_credit,
-    }).catch((err) => console.log(err.response.data));
+    await paymentVerifier(
+      makePayments[0]._id,
+      formData.option,
+      formData.payment
+    );
   };
 
+  const paymentVerifier = async (id, paymentType, payment) => {
+    console.log(paymentType + "<<<<<<<");
+    switch (paymentType) {
+      case "statement_balance":
+        await API.minPayment({
+          id: id,
+          statement_balance:
+            (await makePayments[0].statement_balance) - payment,
+        }).catch((err) => console.log(err.response.data));
+        break;
+      case "minimum_payment":
+        await API.minPayment({
+          id: id,
+          minimum_payment: (await makePayments[0].minimum_payment) - payment,
+          total_balance: (await makePayments[0].total_balance) - payment,
+        }).catch((err) => console.log(err.response.data));
+        break;
+      case "total_balance":
+        await API.minPayment({
+          id: id,
+          total_balance: (await makePayments[0].total_balance) - payment,
+          minimum_payment: (await makePayments[0].minimum_payment) === 0,
+        }).catch((err) => console.log(err.response.data));
+        break;
+      case "pending_charges":
+        await API.minPayment({
+          id: id,
+          pending_charges: (await makePayments[0].pending_charges) - payment,
+        }).catch((err) => console.log(err.response.data));
+        break;
+      case "posted_charges":
+        await API.minPayment({
+          id: id,
+          posted_charges: (await makePayments[0].posted_charges) - payment,
+        }).catch((err) => console.log(err.response.data));
+        break;
+      case "remaining_statement_balance":
+        await API.minPayment({
+          id: id,
+          remaining_statement_balance:
+            (await makePayments[0].remaining_statement_balance) - payment,
+        }).catch((err) => console.log(err.response.data));
+        break;
+      case "available_credit":
+        await API.minPayment({
+          id: id,
+          available_credit: (await makePayments[0].available_credit) - payment,
+        }).catch((err) => console.log(err.response.data));
+        break;
+      case "other_amount":
+        await API.minPayment({
+          id: id,
+          other_amount: (await makePayments[0].other_amount) - payment,
+        }).catch((err) => console.log(err.response.data));
+        break;
+      default:
+      // code block
+    }
+  };
   return (
     <div>
       {makePayments ? (
@@ -88,7 +143,7 @@ const MakePayment = () => {
                       name="option"
                       className="minimum"
                       value="minimum_payment"
-                      checked={isChecked("minimum_payment")}
+                      checked={isChecked(formData.payment)}
                       onChange={handleOnChange}
                     />
                     <label className="minimum-label">
@@ -105,7 +160,7 @@ const MakePayment = () => {
                       name="option"
                       className="remaining"
                       value="remaining_statement_balance"
-                      checked={isChecked("remaining_statement_balance")}
+                      checked={isChecked(formData.payment)}
                       onChange={handleOnChange}
                     />
                     <label className="remaining-label">
@@ -122,7 +177,7 @@ const MakePayment = () => {
                       name="option"
                       className="total"
                       value="total_balance"
-                      checked={isChecked("total_balance")}
+                      checked={isChecked(formData.payment)}
                       onChange={handleOnChange}
                     />
                     <label className="total-label">
@@ -137,7 +192,7 @@ const MakePayment = () => {
                       type="radio"
                       name="option"
                       value="other_amount"
-                      checked={isChecked("other_amount")}
+                      checked={isChecked(formData.payment)}
                       onChange={handleOnChange}
                     />
 
