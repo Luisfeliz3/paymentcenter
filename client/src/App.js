@@ -15,6 +15,8 @@ import "./App.css";
 function App() {
   const [userState, setUserState] = useState();
 
+  document.title = "Payment Center";
+
   useEffect(() => {
     // auth user on first render
     authenticate();
