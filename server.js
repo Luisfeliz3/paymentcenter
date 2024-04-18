@@ -43,17 +43,17 @@ app.use(passport.session());
 
 // Add routes, both API and view
 app.use(routes);
-mongodb://localhost:27017
-// Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/paymentcenter", {
-    useUnifiedTopology: true ,
-  useNewUrlParser: true,
-});
+// mongodb://localhost:27017
+// // Connect to the Mongo DB
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/paymentcenter", {
+//     useUnifiedTopology: true ,
+//   useNewUrlParser: true,
+// });
 
-mongoose.connection.on('connected', ()=>{
-  if (process.env.NODE_ENV === 'production') seed.seed();
-  console.log('Mongoose is connected !')
-})
+// mongoose.connection.on('connected', ()=>{
+//   if (process.env.NODE_ENV === 'production') seed.seed();
+//   console.log('Mongoose is connected !')
+// })
 
 
 
