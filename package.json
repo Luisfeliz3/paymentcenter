@@ -12,6 +12,7 @@
     "seed": "node utils/seedLocalDB.js",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
+    "buildz": "cd client && react-scripts build",
     "heroku-postbuild": "npm run install-client && npm run build"
   },
   "author": "",
