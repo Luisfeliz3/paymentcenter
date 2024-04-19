@@ -8,11 +8,10 @@ import session  from 'express-session'
 // Requiring passport as we've configured it
 import passport from "./utils/passport.js";
 import logger from "morgan";
-// import seed from "./utils/seedBaseDB.js";
- import cors from "cors"
+// import seed from "./utils/seedLocalDB.js";
+import cors from "cors"
  
-// import path from 'path';
-// app.use(express.static(path.join(__dirname, 'build')));
+ 
 const PORT = process.env.PORT || 3001;
 
 // logging (development)
@@ -57,11 +56,12 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/paymentce
 
 
 
-if (process.env.NODE_ENV === 'production' ){
+// if (process.env.NODE_ENV === 'production' ){
 
-  app.use(express.static('client/build'));
-}
+//   app.use(express.static('client/build'));
+// }
 // Start the API server
+
 app.listen(PORT, function () {
 	console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
