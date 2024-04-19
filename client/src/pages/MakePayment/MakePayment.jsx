@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import { FaCircleCheck } from "react-icons/fa6";
+import { FaCircleCheck, FaCircleExclamation } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import API from "../../utils/API.js";
 import Loading from "../../components/Loading/Loading.js";
@@ -39,51 +39,36 @@ const MakePayment = () => {
   const handleSubmit = async (e) => {
     console.log(formData);
     e.preventDefault();
-
-    // const payment = parseInt(formData.payment);
     const payment = parseFloat(formData.payment);
-
     await paymentVerifier(makePayments[0]._id, formData.option, payment);
   };
 
   const paymentVerifier = async (id, paymentType, payment) => {
-
-    console.log(payment)
+    console.log(payment);
     switch (paymentType) {
-
-
       case "statement_balance":
-
-
-      if(payment===await makePayments[0].statement_balance){
-        await API.minPayment({
-          id: id,
-          statement_balance:
-          parseFloat(await makePayments[0].statement_balance) - payment,
-          minimum_payment:   0,
-          total_balance: parseFloat(await makePayments[0].total_balance) - payment,
-        }).catch((err) => console.log(err.response.data));
-      }
-
-      else{
-          alert("Please Pay the Statememnt Balance amount only!")
-
-      }
-
-   
-
-
-
+        if (payment === (await makePayments[0].statement_balance)) {
+          await API.minPayment({
+            id: id,
+            statement_balance:
+              parseFloat(await makePayments[0].statement_balance) - payment,
+            minimum_payment: 0,
+            total_balance:
+              parseFloat(await makePayments[0].total_balance) - payment,
+          }).catch((err) => console.log(err.response.data));
+        } else {
+          alert("Please Pay the Statememnt Balance amount only!");
+        }
         break;
-
-
 
       case "minimum_payment":
         if (payment === 40) {
           await API.minPayment({
             id: id,
-            minimum_payment: parseFloat(await makePayments[0].minimum_payment) - payment,
-            total_balance: parseFloat(await makePayments[0].total_balance) - payment,
+            minimum_payment:
+              parseFloat(await makePayments[0].minimum_payment) - payment,
+            total_balance:
+              parseFloat(await makePayments[0].total_balance) - payment,
           })
             .then(alert("Thank You For Your Payment!"))
             .catch((err) => console.log(err.response.data));
@@ -94,14 +79,14 @@ const MakePayment = () => {
         }
         break;
 
-
       case "total_balance":
         if (parseFloat(await makePayments[0].total_balance) === payment) {
           await API.minPayment({
             id: id,
-            total_balance: parseFloat(await makePayments[0].total_balance) - payment,
-            minimum_payment:   0,
-            statement_balance:  0,
+            total_balance:
+              parseFloat(await makePayments[0].total_balance) - payment,
+            minimum_payment: 0,
+            statement_balance: 0,
           }).catch((err) => console.log(err.response.data));
         } else {
           alert(
@@ -111,20 +96,19 @@ const MakePayment = () => {
         break;
 
       case "other_amount":
-          if(payment >0 && payment <= parseFloat(await makePayments[0].total_balance)  ){
-            await API.minPayment({
-              id: id,
-              total_balance: parseFloat(await makePayments[0].total_balance) - payment,
-            }).catch((err) => console.log(err.response.data));
-          } else {
-              alert("Please pay up to to the Total Amount only! ")
-          }
-
- 
+        if (
+          payment > 0 &&
+          payment <= parseFloat(await makePayments[0].total_balance)
+        ) {
+          await API.minPayment({
+            id: id,
+            total_balance:
+              parseFloat(await makePayments[0].total_balance) - payment,
+          }).catch((err) => console.log(err.response.data));
+        } else {
+          alert("Please pay up to to the Total Amount only! ");
+        }
         break;
-
-
-
       default:
         alert("Please choose a Payment Option");
     }
@@ -140,10 +124,11 @@ const MakePayment = () => {
 
             <div className="payment-message">
               <div className="payment-icon">
-                <FaCircleCheck />
+                {/* <FaCircleCheck /> */}
+                <FaCircleExclamation />
               </div>
               <span className="pay-message-label">
-                No Payment At This Time !
+                Please Choose a Payment Below !
               </span>
             </div>
 
@@ -179,9 +164,7 @@ const MakePayment = () => {
                       name="option"
                       className="remaining"
                       value="statement_balance"
-                      checked={
-                        formData.option === "statement_balance"
-                      }
+                      checked={formData.option === "statement_balance"}
                       onChange={handleOnChange}
                     />
                     <label className="remaining-label">

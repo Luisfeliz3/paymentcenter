@@ -45,7 +45,7 @@ function Activity() {
                   </div>
                   Total Balance
                 </h5>
-                <p className="actvity-card-text">$54.00</p>
+                <p className="actvity-card-text">$834.55</p>
               </div>
             </div>
           </div>
