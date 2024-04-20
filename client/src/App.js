@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"; //Navigate
+import { BrowserRouter, Route, Routes } from "react-router-dom"; //Navigate
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Activity from "./pages/Activity/Activity";
 import Navbar from "./components/NavBar/Navbar";
@@ -8,7 +8,7 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import MakePayment from "./pages/MakePayment/MakePayment";
 
-import ProtectedRoute from "./components/ProtectedRoute";
+// import ProtectedRoute from "./components/ProtectedRoute";
 
 import "./App.css";
 

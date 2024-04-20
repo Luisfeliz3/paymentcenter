@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import userAPI from "../../utils/userAPI";
-import {  Navigate, Link } from "react-router-dom";
+import {  Navigate } from "react-router-dom";
 import "./styles.css"
 
  
@@ -92,7 +92,7 @@ function Signup ({setState, authenticate}) {
               >
                 signup
               </button>
-              <a to="/login"
+              <a to="/login" href="/404"
               >
                <button
                className="signup-login-now btn btn-primary"

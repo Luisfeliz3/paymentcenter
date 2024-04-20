@@ -6,7 +6,7 @@ import './style.css'
 
 function RecentActivity({width, top}) {
    
-  const [rows, setRows] = useState([]);
+ 
   const [trsx, setTrsx] = useState([]);
 
   useEffect(() => {
