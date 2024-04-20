@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import db from "../models/index.js";
+import db from "../../models/index.js";
 import  mongoOptions  from "./config.js";
 import  moment from 'moment';
 
@@ -10,7 +10,7 @@ console.log(moment().add(10, 'days').format("MMM DD") );
 
  
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/paymentcenter", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://user1:password1234@cluster0.k6ma6.mongodb.net/paymentcenter", {
     useUnifiedTopology: true ,
   useNewUrlParser: true,
 });

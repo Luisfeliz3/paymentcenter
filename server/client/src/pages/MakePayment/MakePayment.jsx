@@ -12,8 +12,11 @@ const MakePayment = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+
+
       setLoading(true);
       const res = await API.getBalances();
+      console.log(res)
       setMakePayments(res.data);
       setLoading(false);
     };

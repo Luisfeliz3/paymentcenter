@@ -10,7 +10,7 @@ router.use("/api", apiRoutes);
 
 // If no API routes are hit, send the React app
 router.use(function(req, res) {
-  res.redirect('/dashboard')
+  res.redirect('/')
 });
 
 export default  router;

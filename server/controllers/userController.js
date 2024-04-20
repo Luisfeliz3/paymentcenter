@@ -32,7 +32,7 @@ export default  {
    // to be implemented in the front end
    logout: function(req, res)  {
 		req.logout();
-		res.redirect("/");
+		res.redirect("/dashboard");
    },
    
    authenticate: function( req, res) {

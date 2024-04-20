@@ -2,7 +2,7 @@ import express  from 'express';
 import mongoose from 'mongoose';
 import mongoOptions  from "./utils/config.js";
 // import  sessionOptions  from "./utils/config.js";
-import routes from "./routes/index.js";
+import routes from "../server/routes/index.js";
 const app = express();
 import session  from 'express-session' 
 // Requiring passport as we've configured it
@@ -11,7 +11,27 @@ import logger from "morgan";
 // import seed from "./utils/seedLocalDB.js";
 import cors from "cors"
  
- 
+import path from 'path';
+import {fileURLToPath} from "url";
+import * as dotenv from 'dotenv'
+dotenv.config()
+//Resolving dirname for ES Module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+console.log(__dirname + "<<<<<<<<<<<<<<")
+
+app.get("/", (req,res)=>
+  res.sendFile(path.join(__dirname, '/client/build/index.html'))
+)
+
+app.get("/activity", (req,res)=>
+  res.sendFile(path.join(__dirname, '/client/build/index.html'))
+)
+app.get("/login", (req,res)=>
+  res.sendFile(path.join(__dirname, '/client/build/index.html'))
+)
+
 const PORT = process.env.PORT || 3001;
 
 // logging (development)
@@ -23,7 +43,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Serve static assets from react build
-app.use(express.static("client/build"));
+app.use(express.static(path.join(__dirname, "/client/build")));
 
 // We need to use sessions to keep track of our user's login status
 app.use(session({
@@ -44,23 +64,23 @@ app.use(passport.session());
 app.use(routes);
 // mongodb://localhost:27017
 // // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/paymentcenter", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://user1:password1234@cluster0.k6ma6.mongodb.net/paymentcenter", {
     useUnifiedTopology: true ,
   useNewUrlParser: true,
 });
 
-// mongoose.connection.on('connected', ()=>{
-//   if (process.env.NODE_ENV === 'production') seed.seed();
-//   console.log('Mongoose is connected !')
-// })
+mongoose.connection.on('connected', ()=>{
+  if (process.env.NODE_ENV === 'production') //seed.seed();
+  console.log('Mongoose is connected !')
+})
 
 
 
-// if (process.env.NODE_ENV === 'production' ){
+if (process.env.NODE_ENV === 'production' ){
+  app.use(express.static('/client/build'));
+}
+ 
 
-//   app.use(express.static('client/build'));
-// }
-// Start the API server
 
 app.listen(PORT, function () {
 	console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
