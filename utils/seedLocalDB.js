@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import db from "../../models/index.js";
+import db from "../models/index.js";
 import  mongoOptions  from "./config.js";
 import  moment from 'moment';
 

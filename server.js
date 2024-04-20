@@ -2,7 +2,7 @@ import express  from 'express';
 import mongoose from 'mongoose';
 import mongoOptions  from "./utils/config.js";
 // import  sessionOptions  from "./utils/config.js";
-import routes from "../server/routes/index.js";
+import routes from "./routes/index.js";
 const app = express();
 import session  from 'express-session' 
 // Requiring passport as we've configured it
@@ -20,6 +20,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 console.log(__dirname + "<<<<<<<<<<<<<<")
+
+// Serve static assets from react build
+app.use(express.static(path.join(__dirname, "/client/build")));
 
 app.get("/", (req,res)=>
   res.sendFile(path.join(__dirname, '/client/build/index.html'))
@@ -42,8 +45,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Serve static assets from react build
-app.use(express.static(path.join(__dirname, "/client/build")));
+
 
 // We need to use sessions to keep track of our user's login status
 app.use(session({
