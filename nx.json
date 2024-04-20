@@ -1,0 +1,37 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "targetDefaults": {
+    "start": {
+      "cache": true
+    },
+    "start:prod": {
+      "cache": true
+    },
+    "server": {
+      "cache": true
+    },
+    "start:dev": {
+      "cache": true
+    },
+    "client": {
+      "cache": true
+    },
+    "seed": {
+      "cache": true
+    },
+    "install": {
+      "cache": true
+    },
+    "oldbuild": {
+      "cache": true
+    },
+    "build": {
+      "cache": true
+    },
+    "heroku-postbuild": {
+      "cache": true
+    }
+  },
+  "defaultBase": "master",
+  "nxCloudAccessToken": "NmFhNTUwMzItOGE1Mi00ZjFlLTg3YjAtNDcyMDMwMGNmMzg4fHJlYWQtd3JpdGU="
+}
