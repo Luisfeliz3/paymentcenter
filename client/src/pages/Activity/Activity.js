@@ -3,7 +3,7 @@ import RecentActivity from "../../components/RecentActivity/RecentActivity";
 import LeftNav from "../../components/LeftNav/LeftNav";
 import ToolTip from "../../components/ToolTips";
 // import { MdCalendarMonth } from "react-icons/md";
-import { GrSplits } from "react-icons/gr";
+// import { GrSplits } from "react-icons/gr";
 
 import "./activityStyle.css";
 
@@ -52,7 +52,7 @@ function Activity() {
         </div>
 
         <div className="actvity-card-split">
-        <div className="split-icon"><GrSplits /></div>
+        {/* <div className="split-icon"><GrSplits /></div> */}
           <span className="split-label">Split up your Spending into monthly payments no extra charges or interest fees.</span>
           <span className="split-terms">TERMS & CONDITIONS</span>
         </div>
