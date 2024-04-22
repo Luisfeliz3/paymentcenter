@@ -9,10 +9,10 @@
     "start:prod": "node server.js",
     "server": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "client": "cd ../client && npm run start",
+    "client": "cd client && npm run start",
     "seed": "node utils/seedLocalDB.js",
-    "install": "cd ../client && npm install",
-    "build": "cd ../client && npm run build",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
     "oldbuild": "npm install --prefix ./client && npm run build --prefix ./client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build"
   },
