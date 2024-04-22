@@ -71,10 +71,10 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://user1:password1234@cl
   useNewUrlParser: true,
 });
 
-mongoose.connection.on('connected', ()=>{
-  if (process.env.NODE_ENV === 'production') //seed.seed();
-  console.log('Mongoose is connected !')
-})
+// mongoose.connection.on('connected', ()=>{
+//   if (process.env.NODE_ENV === 'production') //seed.seed();
+//   console.log('Mongoose is connected !')
+// })
 
 
 
