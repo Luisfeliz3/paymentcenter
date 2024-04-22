@@ -19,7 +19,7 @@ dotenv.config()
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log(__dirname + "<<<<<<<<<<<<<<")
+// console.log(__dirname + "<<<<<<<<<<<<<<")
 
 // Serve static assets from react build
 app.use(express.static(path.join(__dirname, "/client/build")));
@@ -77,13 +77,16 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://user1:password1234@cl
 // })
 
 
-
+ 
 if (process.env.NODE_ENV === 'production' ){
+ 
   app.use(express.static('/client/build'));
-}
+
+} 
  
 
 
 app.listen(PORT, function () {
+ 
 	console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });

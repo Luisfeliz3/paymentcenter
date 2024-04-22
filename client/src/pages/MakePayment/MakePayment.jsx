@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
 import { FaCircleCheck, FaCircleExclamation } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import API from "../../utils/API.js";
@@ -8,15 +9,15 @@ import Loading from "../../components/Loading/Loading.js";
 const MakePayment = () => {
   const [makePayments, setMakePayments] = useState();
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({ payment: "0.00" });
-
+  const [formData, setFormData] = useState({ payment: "" });
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
 
 
       setLoading(true);
       const res = await API.getBalances();
-      console.log(res)
+      // console.log(res)
       setMakePayments(res.data);
       setLoading(false);
     };
@@ -40,25 +41,28 @@ const MakePayment = () => {
   };
 
   const handleSubmit = async (e) => {
-    console.log(formData);
+    // console.log(formData);
     e.preventDefault();
     const payment = parseFloat(formData.payment);
     await paymentVerifier(makePayments[0]._id, formData.option, payment);
   };
 
   const paymentVerifier = async (id, paymentType, payment) => {
-    console.log(payment);
+    // console.log(payment);
     switch (paymentType) {
       case "statement_balance":
-        if (payment === (await makePayments[0].statement_balance)) {
+        if (payment === parseFloat(await makePayments[0].statement_balance)) {
           await API.minPayment({
             id: id,
             statement_balance:
-              parseFloat(await makePayments[0].statement_balance) - payment,
+              0,
             minimum_payment: 0,
             total_balance:
-              parseFloat(await makePayments[0].total_balance) - payment,
-          }).catch((err) => console.log(err.response.data));
+              ((await makePayments[0].total_balance) - payment).toFixed(2),
+          })
+          .then(alert("Thank You For Your Payment!"))
+          .then(()=>{navigate("/dashboard")})
+          .catch((err) => console.log(err.response.data));
         } else {
           alert("Please Pay the Statememnt Balance amount only!");
         }
@@ -74,6 +78,7 @@ const MakePayment = () => {
               parseFloat(await makePayments[0].total_balance) - payment,
           })
             .then(alert("Thank You For Your Payment!"))
+            .then(()=>{navigate("/dashboard")})
             .catch((err) => console.log(err.response.data));
         } else if ((await makePayments[0].minimum_payment) === 0) {
           alert("Minium Payment Submitted for this Period");
@@ -90,7 +95,10 @@ const MakePayment = () => {
               parseFloat(await makePayments[0].total_balance) - payment,
             minimum_payment: 0,
             statement_balance: 0,
-          }).catch((err) => console.log(err.response.data));
+          })
+          .then(alert("Thank You For Your Payment!"))
+          .then(()=>{navigate("/dashboard")})
+          .catch((err) => console.log(err.response.data));
         } else {
           alert(
             "You can only Pay the Full Amount, If you want to make a custom payment please choose the 'Pay Other Amount' option"
@@ -107,7 +115,10 @@ const MakePayment = () => {
             id: id,
             total_balance:
               parseFloat(await makePayments[0].total_balance) - payment,
-          }).catch((err) => console.log(err.response.data));
+          })
+          .then(alert("Thank You For Your Payment!"))
+          .then(()=>{navigate("/dashboard")})
+          .catch((err) => console.log(err.response.data));
         } else {
           alert("Please pay up to to the Total Amount only! ");
         }
@@ -156,7 +167,7 @@ const MakePayment = () => {
                     <label className="minimum-label">
                       Minimun Payment Due
                       <span className="minimum-amount-label">
-                        ${bal.minimum_payment}
+                        ${bal.minimum_payment.toFixed(2)}
                       </span>
                     </label>
                   </div>
@@ -173,7 +184,7 @@ const MakePayment = () => {
                     <label className="remaining-label">
                       Pay Statement Balance
                       <span className="remaining-amount-label">
-                        ${bal.statement_balance}
+                        ${bal.statement_balance.toFixed(2)}
                       </span>
                     </label>
                   </div>
@@ -190,7 +201,7 @@ const MakePayment = () => {
                     <label className="total-label">
                       Pay Total Balance
                       <span className="total-amount-label">
-                        ${bal.total_balance}
+                        ${bal.total_balance.toFixed(2)}
                       </span>
                     </label>
                   </div>
@@ -214,6 +225,7 @@ const MakePayment = () => {
                         className="dollar-input "
                         name="payment"
                         autoFocus={true}
+                        value={formData.payment}
                       />
                     </div>
                   </div>

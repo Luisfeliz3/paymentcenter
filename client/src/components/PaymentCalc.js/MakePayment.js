@@ -19,7 +19,7 @@ const MakePayment = () => {
 
   return (
     <div>{
-        console.log("Hello from balances")
+        // console.log("Hello from balances")
         }</div>
   )
 }

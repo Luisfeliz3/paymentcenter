@@ -54,6 +54,7 @@ function App() {
               ></Route>
 
              
+              <Route exact path="/" element={<Dashboard />}></Route>
               <Route exact path="/dashboard" element={<Dashboard />}></Route>
 
               <Route

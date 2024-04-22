@@ -6,7 +6,7 @@ export default  {
 
    login: function(req, res) {
       // Sending back a password, even a hashed password, isn't a good idea
-      console.log(req.user + "GETTING THAT USER")
+      // console.log(req.user + "GETTING THAT USER")
       res.json({
          _id: req.user._id,
          username: req.user.username,

@@ -35,7 +35,7 @@ const CardGroup = () => {
             <div className="card statement">
               <div className="card-body">
                 <h5 className="card-title">Statement Balance</h5>
-                <p className="card-text">${bal.statement_balance}</p>
+                <p className="card-text">${bal.statement_balance.toFixed(2)}</p>
                 <p className="card-text">
                   <small className="text">Oct 15 - Nov 12</small>
                 </p>
@@ -50,7 +50,7 @@ const CardGroup = () => {
                 <p className="card-text">Today</p>
                 <p className="card-text">
                   <small className="text">
-                    Minimum Payment Due ${bal.minimum_payment}
+                    Minimum Payment Due ${bal.minimum_payment.toFixed(2)}
                   </small>
                 </p>
                 <button
@@ -65,10 +65,10 @@ const CardGroup = () => {
             <div className="card balance">
               <div className="card-body">
                 <h5 className="card-title">Total Balance</h5>
-                <p className="card-text">${bal.total_balance}</p>
+                <p className="card-text">${bal.total_balance.toFixed(2)}</p>
                 <p className="card-text">
                   <small className="text">
-                    Available Credit ${bal.available_credit}
+                    Available Credit ${bal.available_credit.toFixed(2)}
                   </small>
                 </p>
                 <a
