@@ -12,8 +12,8 @@
     "client": "cd client && npm run start",
     "seed": "node utils/seedLocalDB.js",
     "install": "cd client && npm install",
-    "oldbuild": "cd client && npm run build",
-    "build": "npm install --prefix ./client && npm run build --prefix ./client && npm install",
+    "build": "cd client && npm run build",
+    "oldbuild": "npm install --prefix ./client && npm run build --prefix ./client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build"
   },
   "author": "",
