@@ -11,29 +11,29 @@ import logger from "morgan";
 // import seed from "./utils/seedLocalDB.js";
 import cors from "cors"
  
-// import path from 'path';
-// import {fileURLToPath} from "url";
-// import * as dotenv from 'dotenv'
-// dotenv.config()
-// //Resolving dirname for ES Module
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+import path from 'path';
+import {fileURLToPath} from "url";
+import * as dotenv from 'dotenv'
+dotenv.config()
+//Resolving dirname for ES Module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// console.log(__dirname + "<<<<<<<<<<<<<<")
+console.log(__dirname + "<<<<<<<<<<<<<<")
 
-// // Serve static assets from react build
-// app.use(express.static(path.join(__dirname, "/client/build")));
+// Serve static assets from react build
+app.use(express.static(path.join(__dirname, "/client/build")));
 
-// app.get("/", (req,res)=>
-//   res.sendFile(path.join(__dirname, '/client/build/index.html'))
-// )
+app.get("/dashboard", (req,res)=>
+  res.sendFile(path.join(__dirname, '/client/build/index.html'))
+)
 
-// app.get("/activity", (req,res)=>
-//   res.sendFile(path.join(__dirname, '/client/build/index.html'))
-// )
-// app.get("/login", (req,res)=>
-//   res.sendFile(path.join(__dirname, '/client/build/index.html'))
-// )
+app.get("/activity", (req,res)=>
+  res.sendFile(path.join(__dirname, '/client/build/index.html'))
+)
+app.get("/login", (req,res)=>
+  res.sendFile(path.join(__dirname, '/client/build/index.html'))
+  )
 
 const PORT = process.env.PORT || 3001;
 
