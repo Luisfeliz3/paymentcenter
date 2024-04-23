@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import API from "../../utils/API.js";
 import Loading from "../Loading/Loading.js";
 
+
+
 const CardGroup = () => {
   const [balances, setBalances] = useState();
   const [loading, setLoading] = useState(false);
@@ -29,6 +31,7 @@ const CardGroup = () => {
 
   return (
     <div>
+      
       {balances ? (
         balances.map((bal, i) => (
           <div className="card-group dashboard">
