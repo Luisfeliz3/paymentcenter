@@ -81,6 +81,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://user1:password1234@cl
 if (process.env.NODE_ENV === 'production' ){
  
   app.use(express.static('/client/build'));
+  
 
 } 
  
