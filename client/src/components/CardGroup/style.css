@@ -6,3 +6,102 @@
 
     color:black
 }
+
+.sb-value{
+    position: relative;
+    font-weight: 600;
+    font-size: 30px;
+    color: green;
+    left: 25px;
+}
+
+.sb-date{
+    position: relative;
+    left: 40px;
+    bottom: 22px;
+}
+.sb-button{
+    position: relative;
+    left: 15px;
+    bottom: 22px;
+}
+
+.tb-value{
+    position: relative;
+    font-weight: 600;
+    font-size: 30px;
+    color: green;
+    left: 25px;
+}
+.tb-title{
+    position: relative;
+    left: 25px;
+}
+
+.tb-credit-title{
+    position: relative;
+    bottom: 20px;
+}
+
+.tb-link {
+    position: relative;
+    bottom: 30px;
+    left: 15px;
+
+}
+
+.map-title{
+    position: relative;
+    left: 25px;
+}
+
+
+.map-title-2{
+    position: relative;
+    left: 75px;
+    color: red;
+    font-weight: 600;
+}
+
+.map-button{
+
+    position: relative;
+    left: 34px;
+    bottom: 3px;
+}
+
+.map-miv-val{
+    color: red;
+    font-weight: 600;
+}
+
+.map-payed{
+    position: relative;
+    left: 34px;
+   
+    
+}
+
+.map-payed-title-2{
+    position: relative;
+    left: 34px;
+    top: 5px;
+
+    color: green;
+}
+
+.map-payed-val{
+    position: relative;
+    left: 34px;
+
+    top: 5px;
+
+}
+
+.map-button-pay {
+    position: relative;
+    left: 34px;
+    top: 15px;
+
+
+}

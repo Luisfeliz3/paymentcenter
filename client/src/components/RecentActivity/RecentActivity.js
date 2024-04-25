@@ -74,7 +74,7 @@ function RecentActivity({width, top}) {
         ? trsx.data.forEach((item, index) => {
             row.push({ ...item, id: item._id }); // Adding a 'id' property with index as its value
 
-            console.log(item);
+            // console.log(item);
           })
         : null}
     </div>

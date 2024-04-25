@@ -9,7 +9,7 @@ import Loading from "../../components/Loading/Loading.js";
 const MakePayment = () => {
   const [makePayments, setMakePayments] = useState();
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({ payment: "" });
+  const [formData, setFormData] = useState({ payment: "0.00" });
   const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
@@ -17,7 +17,7 @@ const MakePayment = () => {
 
       setLoading(true);
       const res = await API.getBalances();
-      // console.log(res)
+      console.log(res)
       setMakePayments(res.data);
       setLoading(false);
     };
@@ -48,7 +48,8 @@ const MakePayment = () => {
   };
 
   const paymentVerifier = async (id, paymentType, payment) => {
-    // console.log(payment);
+ 
+    console.log( payment  + "<<< THIS PAYMENT") ;
     switch (paymentType) {
       case "statement_balance":
         if (payment === parseFloat(await makePayments[0].statement_balance)) {
@@ -69,13 +70,12 @@ const MakePayment = () => {
         break;
 
       case "minimum_payment":
-        if (payment === 40) {
+        if (payment === await makePayments[0].minimum_payment) {
           await API.minPayment({
             id: id,
             minimum_payment:
-              parseFloat(await makePayments[0].minimum_payment) - payment,
-            total_balance:
-              parseFloat(await makePayments[0].total_balance) - payment,
+              0,            
+              total_balance: (await makePayments[0].total_balance) - payment,
           })
             .then(alert("Thank You For Your Payment!"))
             .then(()=>{navigate("/dashboard")})
