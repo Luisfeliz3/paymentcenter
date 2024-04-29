@@ -1,11 +1,88 @@
+@media  (max-width: 1000px){
+
+    .nav-container{
+        margin:auto;
+        background-color: #f8f9fa;
+        width:800px; 
+    }
+
+    .navbar.main{
+        margin:auto;
+        background-color: blue;
+        width:800px; 
+    }
+
+
+} 
 .navbar {
     position: relative;
-    width: 1663px;
-    left: -415px;
-    padding: 15px 10px;
-    background: #fff;
+   
+
     border: none;
     border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+
+.nav-link-container{
+    margin:auto;
+    max-width:800px;    
+}
+
+
+ .nav-box{
+    display: flex;
+    height: 60px;
+    margin:auto;
+    max-width:800px;    
+ }
+
+ .nav-title{
+    position: relative;
+    font-size: 20px;
+    margin : 0px, 16px, 0px, 0px;
+    padding : 5px, 0px;
+    top: 15px;
+    left: 5px;
+
+
+
+ }
+
+ .nav-box-button{
+    position: relative;
+    height: 36px;
+    width :73px;
+    left: 230px;
+    top: 11px;
+ }
+
+ .nav-link.box.help{
+    position: relative;
+    left: 230px;
+    top: 11px;
+ }
+
+.nav-link.box.link-2{
+    position: relative;
+    right: 0px;
+    top: 11px;
+}
+
+
+.nav-link.active.box{
+    position: relative;
+    left: 15px;
+    top: 11px;
+}
+
+.nav-container{
+    margin:auto;
+    background-color: #f8f9fa;
+    width:800px; 
+    border: none;
+    border-radius: 2px;
     margin-bottom: 40px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }

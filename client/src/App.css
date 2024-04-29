@@ -9,11 +9,11 @@
 
 
 body {
-  width: 50%;
+
   background-color: #d7d7d7ec;
   font-family: 'Poppins', sans-serif;
   /* color: white; */
-  margin: auto;
+  margin: 0;
   padding: 0;
 }
  

@@ -1,5 +1,13 @@
+    .card-group{
+        min-width :800px;
+        margin: auto;
+    }
+
+
+
 .card-body{
     margin: auto;
+ 
 }
 
 .card-text{
