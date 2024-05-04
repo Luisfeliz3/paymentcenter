@@ -55,7 +55,7 @@ function RecentActivity({width, top}) {
 
   return (
     <div >
-          <div  style={{ height: 400, width: `${width}px` , top:`${top}px`}} className="recent-activity-table">
+          <div  style={{ height: 400, maxwidth: `${width}px` , top:`${top}px`}} className="recent-activity-table">
      
       <DataGrid
       

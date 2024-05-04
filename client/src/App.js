@@ -35,7 +35,7 @@ function App() {
   };
 
   return (
-    <div>   
+    <div className="app-container">   
       <Navbar/>
       <div>
         <BrowserRouter>

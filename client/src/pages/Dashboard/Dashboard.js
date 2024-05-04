@@ -7,11 +7,11 @@ import Popup from '../../components/Popup/Popup.js'
 
 function Dashboard() {
   return (
-    <div>
-      <Popup/>
+    <div  className="dash-container">
+      {/* <Popup/> */}
       <CardGroup />
       
-      <RecentActivity width={840} top={70} />
+      <RecentActivity width={800} top={70} />
 
       <div className="recent-activity-trsx-header">
        <span className="trsx-label"> Recent Transactions <span className="trsx-date">(Since Mar 15. Closing Apr 12)</span> All Transactions</span>

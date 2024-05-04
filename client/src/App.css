@@ -2,18 +2,36 @@
 
 /* * { font-family: 'Roboto', sans-serif; } */
 
+
+/* Example media query for small screens */
+@media only screen and (min-width: 600px) {
+ 
+
+ 
+
+
+}
+
+
+
+
 /* stylelint-disable */
 :root {
   --footer-height: 52px;
+ 
 }
 
 
 body {
-  width: 50%;
+
   background-color: #d7d7d7ec;
   font-family: 'Poppins', sans-serif;
   /* color: white; */
-  margin: auto;
-  padding: 0;
+  
+ 
+}
+
+.app-container{
+  background-color: blue;
 }
  
