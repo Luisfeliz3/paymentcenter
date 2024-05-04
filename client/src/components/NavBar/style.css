@@ -1,8 +1,5 @@
    /* Example media query for small screens */
-  @media (max-width: 400px), (max-width: 850px) {
- 
-   
-
+  @media (max-width: 300px), (max-width: 850px) {
     .navbar-brand{
         display: none;
     }
@@ -20,10 +17,9 @@
         display: none;
     }
 
-
-
-
    }
+
+   
    
       
 
@@ -96,7 +92,7 @@
 
 .nav-login{
     position: relative;
-    left: 225px;
+    left: 190px;
     top: 7px;
 
 }
@@ -116,7 +112,7 @@
 }
 .nav-link.help{
     position: relative;
-    left: 223px;
+    left: 200px;
     top: 5px;
 
 }

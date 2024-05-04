@@ -14,7 +14,7 @@
    .card-group{
         max-width :800px;
         margin: auto;
-        background-color: red;
+        /* background-color: red; */
     }
 
 
@@ -89,10 +89,12 @@
 
     position: relative;
     left: 34px;
-    bottom: 3px;
+    bottom: 32px;
 }
 
 .map-miv-val{
+    position: relative;
+    left: 55px;
     color: red;
     font-weight: 600;
 }
@@ -125,5 +127,12 @@
     left: 34px;
     top: 15px;
 
+
+}
+
+.min-pay-text{
+    position: relative;
+    bottom: 18px;
+    left: 20px;
 
 }

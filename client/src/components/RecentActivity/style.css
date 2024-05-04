@@ -1,3 +1,18 @@
+@media (max-width: 300px), (max-width: 850px) {
+
+
+    .trsx-label {
+        position: relative;
+        font-size: xx-small;
+        
+    }
+
+}
+
+
+
+
+
 .recent-activity-table{
     position: relative;
     background-color: #fff;

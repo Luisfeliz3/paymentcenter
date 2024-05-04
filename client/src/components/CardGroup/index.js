@@ -58,7 +58,7 @@ bal.minimum_payment.toFixed(2) === "40.00" ?
                 <h5 className="map-title card-title">Make A Payment</h5>
                 <p className="map-title-2 card-text">Today</p>
                 <p className="card-text">
-                  <small className="text">
+                  <small className="min-pay-text">
                     Minimum Payment Due <span className="map-miv-val">${bal.minimum_payment.toFixed(2)}</span>
                   </small>
                 </p>
