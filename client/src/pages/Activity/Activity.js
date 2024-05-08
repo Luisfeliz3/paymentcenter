@@ -66,7 +66,7 @@ function Activity() {
 
         <div className="actvity-card-spend"></div>
         <section id="recent-activity">
-          <RecentActivity width={733} />
+          <RecentActivity width={400} />
         </section>
       </div>
     </div>
