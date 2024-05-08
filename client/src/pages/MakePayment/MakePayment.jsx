@@ -214,7 +214,7 @@ const MakePayment = () => {
                       onChange={handleOnChange}
                     />
 
-                    <label>Pay Other Amount</label>
+                    <label className="other-label">Pay Other Amount</label>
 
                     <div className="dollar-input-container">
                       <span className="dollar-sign">$</span>
