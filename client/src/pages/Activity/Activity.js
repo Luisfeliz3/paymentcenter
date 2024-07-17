@@ -14,7 +14,7 @@ function Activity() {
 
       <div className="activity-container">
         <div className="activity">
-          <div className="actvity-card-group col-md-8">
+          {/* <div className="actvity-card-group">
             <div className="actvity-card vital">
               <div className="actvity-card-body">
                 <h5 className="actvity-card-title">
@@ -48,7 +48,7 @@ function Activity() {
                 <p className="actvity-card-text">$834.55</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="actvity-card-split">

@@ -16,7 +16,7 @@
   .actvity-card.vital{
    
     position: relative;
-    min-width: 189px !important;
+  
   }
 
   .statement-label{
@@ -52,10 +52,13 @@
 }
 
 
+ 
+
 
 }
 /* ------------------------------------------- */
 
+ 
 
 .activity-container{
   position: relative;
