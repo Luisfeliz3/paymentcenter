@@ -1,13 +1,73 @@
+
+/* Example media query for small screens */
+@media only screen and (max-width: 580px) {
+ 
+  #sidebar{
+    display: none;
+  }
+ 
+  .activity-container{
+    
+    top: 564px !important;
+    height: 0px;
+    left: -140px !important;
+  }
+
+  .actvity-card.vital{
+   
+    position: relative;
+    min-width: 189px !important;
+  }
+
+  .statement-label{
+      right: 140px !important;
+  }
+  
+  .statement-icon{
+    position: absolute;
+  
+    right: 285px !important;
+    bottom: 15px !important;
+  
+  }
+
+  .split-label{
+    left: 9px !important;
+    bottom: 80px !important;
+    font-size: 14px;
+  }
+
+  .split-icon{
+    top: 50px !important;
+
+    left: 280px !important;
+
+ }
+
+ .split-terms{
+ 
+  bottom: 15px !important;
+  right: 196px !important;
+
+}
+
+
+
+}
+/* ------------------------------------------- */
+
+
 .activity-container{
   position: relative;
   top: 43px;
-
+  left: 310px;
+  max-width :800px;
 }
 
 .actvity-card-group{
   position :relative;
   display: inline-flex;
-  width :733px;
+  max-width :733px;
  
   bottom: 583px;
   right: 300px;
@@ -16,7 +76,7 @@
 .activity {
  position: relative;
   right: -440px;
-  width: 20px;
+  max-width: 20px;
 
 }
 
@@ -27,9 +87,9 @@
 
 .actvity-card.vital{
   background-color: #fff;
-  
+  position: relative;
   height: 120px;
-  width : 350px;
+  min-width : 244px;
  
 
 }
@@ -37,31 +97,34 @@
 .actvity-card-split{
   position: relative;
   background-color: #fff;
-  display:inline-grid;
-  bottom :582px;
+  /* display:inline-grid; */
+  bottom: 516px;
   height: 120px;
-  width: 733px;
+  max-width: 733px;
   left :140px;
 }
 
 .split-label{
-  position: relative;
+  position: absolute;
   margin: auto;
-  bottom: 15px;
+  bottom: 85px;
+  left: 50px;
+
 
 }
 .split-terms{
-  position: relative;
+  position: absolute;
   margin: auto;
   bottom: 20px;
-  right: 25px;
+  right: 280px;
+
 }
 .split-icon{
-  position: relative;
- width : 30px;
- top: 33px;
- left: 20px;
+  position: absolute;
+  max-width : 30px;
+  top: 42px;
 
+ left: 356px;
  color : #0d6efd;
 
 }
@@ -70,35 +133,35 @@
 .actvity-dl-statement{
   position: relative;
   background-color: #fff;
-  display:inline-grid;
-  bottom :581px;
+  /* display:inline-grid; */
+  bottom: 700px;
   height: 60px;
-  width: 733px;
-  left :140px;
+  max-width: 733px;
+  left: 140px;
+
 }
 
 .statement-icon{
-  position: relative;
+  position: absolute;
     margin :auto;
     color : #0d6efd;
-    right: 20px;
+    right: 363px;
+    top:20px;
 
 }
 .statement-label{
-  position: relative;
+  position: absolute;
     margin :auto;
-    right: 0px;
-
+    right: 210px;
  
 }
 
 .actvity-card-spend{
   position: relative;
   background-color: #fff;
- 
-  bottom :575px;
+  bottom: 570px;
   height: 150px;
-  width: 733px;
+  max-width: 733px;
   left :140px;
 
 }
@@ -122,8 +185,8 @@
 
 #recent-activity{
   position: relative;
-  width: 65%;
-  bottom: 600px;
+  max-width: 733px;
+  bottom: 665px;
   left: 140px;
 
 }
@@ -131,7 +194,15 @@
 .charges-tooltip{
   position: relative;
   left: 76px;
-    top:15px;
+  top:15px;
 }
 
+.recent-activity-table{
+  top : 100px;
+}
+
+#sidebar{
+  left: 126px;
+
+}
  

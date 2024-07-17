@@ -65,7 +65,6 @@ function App() {
                   <Signup authenticate={authenticate} user={userState} />
                 }
               >
- 
               </Route>
 
               <Route
@@ -73,7 +72,9 @@ function App() {
                 path="/activity"
                 element={<Activity {...userState} />}
               ></Route>
+
               <Route exact path="/payment" element={<MakePayment />}></Route>
+
             </Routes>
           </div>
         </BrowserRouter>

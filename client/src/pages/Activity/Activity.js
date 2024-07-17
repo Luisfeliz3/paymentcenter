@@ -10,7 +10,7 @@ import "./activityStyle.css";
 function Activity() {
   return (
     <div>
-      <LeftNav />
+      <LeftNav className="sidesbar" />
 
       <div className="activity-container">
         <div className="activity">
@@ -52,9 +52,10 @@ function Activity() {
         </div>
 
         <div className="actvity-card-split">
-        <div className="split-icon"><GrSplits /></div>
+        
           <span className="split-label">Split up your Spending into monthly payments no extra charges or interest fees.</span>
           <span className="split-terms">TERMS & CONDITIONS</span>
+          <div className="split-icon"><GrSplits /></div>
         </div>
 
 
@@ -66,7 +67,7 @@ function Activity() {
 
         <div className="actvity-card-spend"></div>
         <section id="recent-activity">
-          <RecentActivity width={400} />
+          <RecentActivity width={735} />
         </section>
       </div>
     </div>

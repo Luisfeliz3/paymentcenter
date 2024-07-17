@@ -50,7 +50,7 @@ function RecentActivity({width, top}) {
 
   // ];
 
-  const row = [];
+  const row = []; 
  
 
   return (
@@ -58,7 +58,6 @@ function RecentActivity({width, top}) {
           <div  style={{ height: 400, maxwidth: `${width}px` , top:`${top}px`}} className="recent-activity-table">
      
       <DataGrid
-      
         rows={row}
         columns={columns}
         initialState={{

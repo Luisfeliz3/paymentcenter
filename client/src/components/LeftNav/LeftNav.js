@@ -4,7 +4,7 @@ import "./style.css";
 
 function LeftNav() {
 	return (
-<div className="wrapper">
+<div >
         {/* <!-- Sidebar  --> */}
         <nav id="sidebar">
             <div className="sidebar-header">
