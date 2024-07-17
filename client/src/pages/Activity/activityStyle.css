@@ -1,6 +1,6 @@
 
 /* Example media query for small screens */
-@media only screen and (max-width: 580px) {
+@media only screen and (max-width: 560px) {
  
   #sidebar{
     display: none;
