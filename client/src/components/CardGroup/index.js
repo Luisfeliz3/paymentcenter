@@ -25,7 +25,7 @@ const CardGroup = () => {
       setBalances(res.data);
       setLoading(false);
     };
-
+console.log(balances)
     fetchData();
   }, []);
 

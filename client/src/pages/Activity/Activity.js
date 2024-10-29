@@ -14,12 +14,12 @@ function Activity() {
 
       <div className="activity-container">
         <div className="activity">
-          {/* <div className="actvity-card-group">
+          <div className="actvity-card-group">
             <div className="actvity-card vital">
               <div className="actvity-card-body">
                 <h5 className="actvity-card-title">
                   <div className="charges-tooltip">
-                    <ToolTip />
+              
                   </div>
                   Pendin Charges
                 </h5>
@@ -30,7 +30,7 @@ function Activity() {
               <div className="actvity-card-body">
                 <h5 className="actvity-card-title">
                   <div className="charges-tooltip">
-                    <ToolTip />
+              
                   </div>
                   Posted Charges
                 </h5>
@@ -41,16 +41,16 @@ function Activity() {
               <div className="actvity-card-body">
                 <h5 className="actvity-card-title">
                   <div className="charges-tooltip">
-                    <ToolTip />
+            
                   </div>
                   Total Balance
                 </h5>
                 <p className="actvity-card-text">$834.55</p>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
-
+<div className="actvity-card-spend"></div>
         <div className="actvity-card-split">
         
           <span className="split-label">Split up your Spending into monthly payments no extra charges or interest fees.</span>

@@ -1,22 +1,16 @@
-
-/* Example media query for small screens */
-@media only screen and (max-width: 560px) {
+/* Example media query for small screens */ @media (max-width: 800px) and (max-width: 800px) {
  
   #sidebar{
     display: none;
   }
  
   .activity-container{
-    
-    top: 564px !important;
-    height: 0px;
-    left: -140px !important;
+   margin: auto !important;
   }
-
   .actvity-card.vital{
    
     position: relative;
-  
+    
   }
 
   .statement-label{
@@ -51,6 +45,13 @@
 
 }
 
+.actvity-card-group{
+ 
+  display: grid !important;
+  min-width :610px !important;
+ 
+ 
+}
 
  
 
@@ -61,10 +62,8 @@
  
 
 .activity-container{
-  position: relative;
-  top: 43px;
-  left: 310px;
   max-width :800px;
+  margin: auto;
 }
 
 .actvity-card-group{

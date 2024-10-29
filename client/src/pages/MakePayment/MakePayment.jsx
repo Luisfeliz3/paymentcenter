@@ -65,7 +65,7 @@ const MakePayment = () => {
           .then(()=>{navigate("/dashboard")})
           .catch((err) => console.log(err.response.data));
         } else {
-          alert("Please Pay the Statememnt Balance amount only!");
+          alert("Please Pay the Statement Balance amount only!");
         }
         break;
 
@@ -83,7 +83,7 @@ const MakePayment = () => {
         } else if ((await makePayments[0].minimum_payment) === 0) {
           alert("Minium Payment Submitted for this Period");
         } else {
-          alert("Minium Payment is $40.00");
+          alert("Minium Payment MUST BE  $40.00");
         }
         break;
 
