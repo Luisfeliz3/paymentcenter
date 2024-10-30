@@ -7,7 +7,7 @@
   .activity-container{
    margin: auto !important;
   }
-  .actvity-card.vital{
+  .activity-card.vital{
    
     position: relative;
     
@@ -45,7 +45,7 @@
 
 }
 
-.actvity-card-group{
+.activity-card-group{
  
   display: grid !important;
   min-width :610px !important;
@@ -62,17 +62,28 @@
  
 
 .activity-container{
+  position: relative;
   max-width :800px;
+  top: 43px;
+
   margin: auto;
 }
 
-.actvity-card-group{
+.activity-card-group{
   position :relative;
   display: inline-flex;
   max-width :733px;
  
   bottom: 583px;
   right: 300px;
+
+ 
+
+
+
+
+
+  
 }
 
 .activity {
@@ -87,7 +98,7 @@
     right: -0px;  
 }
 
-.actvity-card.vital{
+.activity-card.vital{
   background-color: #fff;
   position: relative;
   height: 120px;
@@ -96,11 +107,11 @@
 
 }
 
-.actvity-card-split{
+.activity-card-split{
   position: relative;
   background-color: #fff;
   /* display:inline-grid; */
-  bottom: 516px;
+  bottom: 520px;
   height: 120px;
   max-width: 733px;
   left :140px;
@@ -132,11 +143,11 @@
 }
 
 
-.actvity-dl-statement{
+.activity-dl-statement{
   position: relative;
   background-color: #fff;
   /* display:inline-grid; */
-  bottom: 700px;
+  bottom: 701px;
   height: 60px;
   max-width: 733px;
   left: 140px;
@@ -158,10 +169,10 @@
  
 }
 
-.actvity-card-spend{
+.activity-card-spend{
   position: relative;
   background-color: #fff;
-  bottom: 570px;
+  bottom: 579px;
   height: 150px;
   max-width: 733px;
   left :140px;
@@ -169,19 +180,21 @@
 }
 
 
-.actvity-card-title{
+.activity-card-title{
   margin-top: 40px;
   text-align: center;
   font-size: 15px;
   position: relative;
-  top: -41px;
+  bottom: 15px;
+
 }
-.actvity-card-text{
+.activity-card-text{
   position: relative;
   text-align: center;
   font-size: 30px;
   color: black;
-  top: -36px;
+  bottom: 5px;
+
 
 }
 
