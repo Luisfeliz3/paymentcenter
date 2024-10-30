@@ -59,15 +59,26 @@
 }
 /* ------------------------------------------- */
 
- 
-
-.activity-container{
-  position: relative;
-  max-width :800px;
-  top: 43px;
-
+@media only screen and (max-width: 500px) {
+  .activity-card-group{
   margin: auto;
+ 
+  }
+  .activity-container{
+    position: relative;
+    top: 550px;
+    margin: auto !important;
+    right: 43px;
+
+  }
+
+  .activity-card.vital{
+    width: 366px;
+
+  }
 }
+
+
 
 .activity-card-group{
   position :relative;
@@ -76,14 +87,6 @@
  
   bottom: 583px;
   right: 300px;
-
- 
-
-
-
-
-
-  
 }
 
 .activity {
