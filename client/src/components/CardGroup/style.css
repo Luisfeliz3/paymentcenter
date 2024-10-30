@@ -7,7 +7,27 @@
         padding: 10px;
 
     }
-    .map-payed-val{
+
+    .card-body{
+       margin: 0 auto;
+    }
+
+    .card-text.pay{
+       flex: auto !important;
+    }
+
+    .map-button{
+        bottom: 10px !important;
+    }
+
+    .map-miv-val{
+ 
+   
+        left: -95px !important;
+
+        
+    }
+    /* .map-payed-val{
  
         margin: auto !important;
         left: -128px !important;
@@ -29,13 +49,7 @@
 
     }
 
-   .map-miv-val{
- 
-        display: grid !important;
-        left: 60px !important;
-
-        
-    }.sb-value{
+.sb-value{
  
         left: 20px  !important;
     }
@@ -57,9 +71,7 @@
      
     }
 
-    .map-button{
-        left: 20px !important;
-    }
+
 
     .min-pay-text{
         left: 7px !important;
@@ -79,7 +91,7 @@
 
    .tb-link{
     left: 35px !important;
-   }
+   } */
   
 
 }
@@ -213,3 +225,4 @@
     left: 20px;
 
 }
+

@@ -56,11 +56,12 @@ bal.minimum_payment.toFixed(2) === "40.00" ?
               <div className="card payment">
               <div className="card-body">
                 <h5 className="map-title card-title">Make A Payment</h5>
-                <p className="map-title-2 card-text">Today</p>
+                <p className="map-title-2 card-text pay">Today</p>
                 <p className="card-text">
                   <small className="min-pay-text">
-                    Minimum Payment Due <span className="map-miv-val">${bal.minimum_payment.toFixed(2)}</span>
+                    Minimum Payment Due 
                   </small>
+                  <small className="map-miv-val">${bal.minimum_payment.toFixed(2)}</small>
                 </p>
                 <button
                   className="map-button btn btn-outline-primary"
