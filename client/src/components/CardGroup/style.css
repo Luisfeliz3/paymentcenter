@@ -32,16 +32,55 @@
    .map-miv-val{
  
         display: grid !important;
+        left: 60px !important;
+
         
     }.sb-value{
  
-        left: 15px  !important;
+        left: 20px  !important;
     }
         
     .tb-value{
   
-        left: 15px  !important;
+        left: 42px  !important;
     }
+
+
+    .map-title{
+ 
+        left: 15px !important;
+    }
+    
+    .sb-button{
+        
+        left: 15px !important;
+     
+    }
+
+    .map-button{
+        left: 20px !important;
+    }
+
+    .min-pay-text{
+        left: 7px !important;
+    }
+    
+    .map-title-2 {
+        left: 65px !important;
+    }
+
+    .tb-title {
+        left: 43px !important;
+    }
+
+   .tb-credit-title{
+    left: 8px !important;
+   }
+
+   .tb-link{
+    left: 35px !important;
+   }
+  
 
 }
 
