@@ -7,6 +7,9 @@ import userAPI from "./utils/userAPI";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import MakePayment from "./pages/MakePayment/MakePayment";
+import AccountServices from "./pages/AccountServices/AccountServices";
+import Disputes from "./pages/Disputes/Disputes";
+import AccountManagement from "./pages/AccountManagement/AccountManagement";
 
 // import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -67,10 +70,31 @@ function App() {
               >
               </Route>
 
+    <Route
+                exact
+                path="/helpcenter"
+                element={<Disputes {...userState} />}
+              ></Route>
+    <Route
+                exact
+                path="/disputes"
+                element={<Disputes {...userState} />}
+              ></Route>
+    <Route
+                exact
+                path="/account-management"
+                element={<AccountManagement {...userState} />}
+              ></Route>
               <Route
                 exact
                 path="/activity"
                 element={<Activity {...userState} />}
+              ></Route>
+
+                          <Route
+                exact
+                path="/accountservices"
+                element={<AccountServices {...userState} />}
               ></Route>
 
               <Route exact path="/payment" element={<MakePayment />}></Route>

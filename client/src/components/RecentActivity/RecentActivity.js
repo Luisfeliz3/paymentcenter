@@ -1,83 +1,245 @@
 import { useState, useEffect } from "react";
 import API from "../../utils/API.js";
 import * as React from "react";
-import { DataGrid } from "@mui/x-data-grid";
-import './style.css'
+import { 
+  DataGrid, 
+  gridClasses 
+} from "@mui/x-data-grid";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  Chip,
+  Tooltip,
+  IconButton
+} from '@mui/material';
+import {
+  Receipt,
+  Info,
+  Refresh
+} from '@mui/icons-material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-function RecentActivity({width, top}) {
-   
- 
+// Use the same theme from the previous component
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1a5276',
+      light: '#2e86ab',
+      dark: '#0e3d5e'
+    },
+    secondary: {
+      main: '#27ae60',
+      light: '#58d68d',
+      dark: '#1e8449'
+    },
+    background: {
+      default: '#f8f9fa',
+      paper: '#ffffff'
+    },
+    text: {
+      primary: '#2c3e50',
+      secondary: '#566573'
+    }
+  },
+  typography: {
+    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+    h5: {
+      fontWeight: 600,
+    },
+    h6: {
+      fontWeight: 600,
+    },
+    subtitle1: {
+      fontWeight: 500,
+    }
+  },
+  shape: {
+    borderRadius: 12,
+  }
+});
+
+function RecentActivity({ width, top }) {
   const [trsx, setTrsx] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    API.getTransactions()
-      .then((res) => setTrsx(res))
-      .catch((err) => console.log(err));
+    loadTransactions();
   }, []);
 
+  const loadTransactions = () => {
+    setLoading(true);
+    API.getTransactions()
+      .then((res) => {
+        setTrsx(res);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  };
+
   const columns = [
-    // { field: 'id', headerName: ' ', width: 70 },  /**hidden to not show the id value */
-    { field: "date", headerName: "DATE", width: 230 },
-    { field: "description", headerName: "DESCRIPTION", width: 300 },
-    { field: "amount", headerName: "AMOUNT", width: 130 },
-    // {
-    //   field: 'age',
-    //   headerName: 'Age',
-    //   type: 'number',
-    //   width: 90,
-    // },
-    // {
-    //   field: 'fullName',
-    //   headerName: 'Full name',
-    //   description: 'This column has a value getter and is not sortable.',
-    //   sortable: false,
-    //   width: 160,
-    //   valueGetter: (params) =>
-    //     `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-    // },
+    { 
+      field: "date", 
+      headerName: "DATE", 
+      width: 150,
+      headerClassName: 'data-grid-header',
+      cellClassName: 'data-grid-cell',
+      renderCell: (params) => (
+        <Tooltip title={params.value}>
+          <Typography variant="body2">
+            {new Date(params.value).toLocaleDateString()}
+          </Typography>
+        </Tooltip>
+      )
+    },
+    { 
+      field: "description", 
+      headerName: "DESCRIPTION", 
+      width: 300,
+      headerClassName: 'data-grid-header',
+      cellClassName: 'data-grid-cell',
+      renderCell: (params) => (
+        <Tooltip title={params.value}>
+          <Typography variant="body2" noWrap>
+            {params.value}
+          </Typography>
+        </Tooltip>
+      )
+    },
+    { 
+      field: "amount", 
+      headerName: "AMOUNT", 
+      width: 130,
+      headerClassName: 'data-grid-header',
+      cellClassName: 'data-grid-cell',
+      renderCell: (params) => {
+        const amount = parseFloat(params.value);
+        const isPositive = amount >= 0;
+        return (
+          <Chip
+            label={`${isPositive ? '+' : ''}$${Math.abs(amount).toFixed(2)}`}
+            size="small"
+            color={isPositive ? 'success' : 'error'}
+            variant="outlined"
+            sx={{ 
+              fontWeight: 'bold',
+              borderWidth: '2px'
+            }}
+          />
+        );
+      }
+    },
   ];
 
-  // const rows = [
-  //   { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  //   { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  //   { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  //   { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  //   { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  //   { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  //   { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  //   { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  //   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-
-  // ];
-
-  const row = []; 
- 
+  const rows = trsx.data ? trsx.data.map((item, index) => ({
+    ...item,
+    id: item._id || index
+  })) : [];
 
   return (
-    <div >
-          <div  style={{ height: 400, maxwidth: `${width}px` , top:`${top}px`}} className="recent-activity-table">
-     
-      <DataGrid
-        rows={row}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
-          },
-        }}
-        pageSizeOptions={[5, 10]}
-        checkboxSelection
-      />
+    <ThemeProvider theme={theme}>
+      <Box sx={{ width: width || '100%', mt: top || 0 }}>
+        <Card 
+          elevation={2} 
+          sx={{ 
+            bgcolor: 'background.paper',
+            height: 400,
+            display: 'flex',
+            flexDirection: 'column'
+          }}
+        >
+          <CardContent sx={{ pb: 1 }}>
+            <Box sx={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'space-between',
+              mb: 2 
+            }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Receipt color="primary" />
+                <Typography variant="h6" color="primary">
+                  Recent Activity
+                </Typography>
+                <Tooltip title="Number of transactions">
+                  <Chip 
+                    label={rows.length} 
+                    size="small" 
+                    color="primary"
+                    variant="outlined"
+                  />
+                </Tooltip>
+              </Box>
+              
+              <Tooltip title="Refresh transactions">
+                <IconButton 
+                  size="small" 
+                  onClick={loadTransactions}
+                  disabled={loading}
+                  color="primary"
+                >
+                  <Refresh />
+                </IconButton>
+              </Tooltip>
+            </Box>
+          </CardContent>
 
-      {trsx.data
-        ? trsx.data.forEach((item, index) => {
-            row.push({ ...item, id: item._id }); // Adding a 'id' property with index as its value
-
-            // console.log(item);
-          })
-        : null}
-    </div>
-    </div>
+          <Box sx={{ flex: 1, width: '100%' }}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              loading={loading}
+              initialState={{
+                pagination: {
+                  paginationModel: { page: 0, pageSize: 5 },
+                },
+                sorting: {
+                  sortModel: [{ field: 'date', sort: 'desc' }],
+                },
+              }}
+              pageSizeOptions={[5, 10, 25]}
+              checkboxSelection
+              disableRowSelectionOnClick
+              sx={{
+                border: 'none',
+                '& .MuiDataGrid-cell': {
+                  borderBottom: '1px solid',
+                  borderColor: 'grey.100',
+                },
+                '& .MuiDataGrid-columnHeaders': {
+                  backgroundColor: 'grey.50',
+                  borderBottom: '2px solid',
+                  borderColor: 'primary.main',
+                },
+                '& .MuiDataGrid-columnHeaderTitle': {
+                  fontWeight: 'bold',
+                  color: 'primary.dark',
+                },
+                '& .MuiDataGrid-row:hover': {
+                  backgroundColor: 'grey.50',
+                },
+                '& .MuiDataGrid-footerContainer': {
+                  borderTop: '1px solid',
+                  borderColor: 'grey.200',
+                },
+                '& .MuiCheckbox-root': {
+                  color: 'primary.main',
+                },
+                '& .MuiDataGrid-cell:focus': {
+                  outline: 'none',
+                },
+                '& .MuiDataGrid-columnHeader:focus': {
+                  outline: 'none',
+                },
+              }}
+            />
+          </Box>
+        </Card>
+      </Box>
+    </ThemeProvider>
   );
 }
 

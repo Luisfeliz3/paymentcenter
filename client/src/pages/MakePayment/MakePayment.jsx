@@ -1,25 +1,101 @@
 import React from "react";
-import "./style.css";
 import { useNavigate } from "react-router-dom";
-import { FaCircleCheck, FaCircleExclamation } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import API from "../../utils/API.js";
 import Loading from "../../components/Loading/Loading.js";
+import {
+  Box,
+  Container,
+  Card,
+  CardContent,
+  Typography,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  TextField,
+  Button,
+  Alert,
+  Divider,
+  Stack,
+  Paper,
+  InputAdornment,
+  CircularProgress,
+  Grid
+} from '@mui/material';
+import {
+  AccountBalance,
+  Payment,
+  CheckCircle,
+  Warning,
+  Info,
+  ArrowBack,
+  CreditCard,
+  Security
+} from '@mui/icons-material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+// Use the same theme from the previous components
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1a5276',
+      light: '#2e86ab',
+      dark: '#0e3d5e'
+    },
+    secondary: {
+      main: '#27ae60',
+      light: '#58d68d',
+      dark: '#1e8449'
+    },
+    background: {
+      default: '#f8f9fa',
+      paper: '#ffffff'
+    },
+    text: {
+      primary: '#2c3e50',
+      secondary: '#566573'
+    }
+  },
+  typography: {
+    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+    h4: {
+      fontWeight: 600,
+    },
+    h5: {
+      fontWeight: 600,
+    },
+    h6: {
+      fontWeight: 600,
+    },
+    subtitle1: {
+      fontWeight: 500,
+    }
+  },
+  shape: {
+    borderRadius: 12,
+  }
+});
 
 const MakePayment = () => {
   const [makePayments, setMakePayments] = useState();
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({ payment: "0.00" });
+  const [processing, setProcessing] = useState(false);
+  const [formData, setFormData] = useState({ payment: "0.00", option: "" });
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
-
-
       setLoading(true);
-      const res = await API.getBalances();
-      console.log(res)
-      setMakePayments(res.data);
-      setLoading(false);
+      try {
+        const res = await API.getBalances();
+        console.log(res);
+        setMakePayments(res.data);
+      } catch (error) {
+        console.error("Error fetching balances:", error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchData();
   }, []);
@@ -27,11 +103,12 @@ const MakePayment = () => {
   const handleOnChange = async (event) => {
     const { name, value } = event.target;
     const regex = /^\d*\.?\d{0,2}$/;
+    
     if (
       regex.test(value) ||
-      (await value) === " " ||
-      (await value) === "0.00" ||
-      (await name) === "option"
+      value === " " ||
+      value === "0.00" ||
+      name === "option"
     ) {
       setFormData({
         ...formData,
@@ -41,31 +118,37 @@ const MakePayment = () => {
   };
 
   const handleSubmit = async (e) => {
-    // console.log(formData);
     e.preventDefault();
+    if (!formData.option) {
+      alert("Please select a payment option");
+      return;
+    }
+    
+    setProcessing(true);
     const payment = parseFloat(formData.payment);
     await paymentVerifier(makePayments[0]._id, formData.option, payment);
+    setProcessing(false);
   };
 
   const paymentVerifier = async (id, paymentType, payment) => {
- 
-    console.log( payment  + "<<< THIS PAYMENT") ;
+    console.log(payment + "<<< THIS PAYMENT");
+    
     switch (paymentType) {
       case "statement_balance":
         if (payment === parseFloat(await makePayments[0].statement_balance)) {
           await API.minPayment({
             id: id,
-            statement_balance:
-              0,
+            statement_balance: 0,
             minimum_payment: 0,
-            total_balance:
-              ((await makePayments[0].total_balance) - payment).toFixed(2),
+            total_balance: ((await makePayments[0].total_balance) - payment).toFixed(2),
           })
-          .then(alert("Thank You For Your Payment!"))
-          .then(()=>{navigate("/dashboard")})
-          .catch((err) => console.log(err.response.data));
+          .then(() => {
+            alert("Thank You For Your Payment!");
+            navigate("/dashboard");
+          })
+          .catch((err) => console.log(err.response?.data || err));
         } else {
-          alert("Please Pay the Statement Balance amount only!");
+          alert("Please pay the exact Statement Balance amount only!");
         }
         break;
 
@@ -73,17 +156,18 @@ const MakePayment = () => {
         if (payment === await makePayments[0].minimum_payment) {
           await API.minPayment({
             id: id,
-            minimum_payment:
-              0,            
-              total_balance: (await makePayments[0].total_balance) - payment,
+            minimum_payment: 0,            
+            total_balance: (await makePayments[0].total_balance) - payment,
           })
-            .then(alert("Thank You For Your Payment!"))
-            .then(()=>{navigate("/dashboard")})
-            .catch((err) => console.log(err.response.data));
+          .then(() => {
+            alert("Thank You For Your Payment!");
+            navigate("/dashboard");
+          })
+          .catch((err) => console.log(err.response?.data || err));
         } else if ((await makePayments[0].minimum_payment) === 0) {
-          alert("Minium Payment Submitted for this Period");
+          alert("Minimum payment already submitted for this period");
         } else {
-          alert("Minium Payment MUST BE  $40.00");
+          alert("Minimum payment must be $" + makePayments[0].minimum_payment.toFixed(2));
         }
         break;
 
@@ -91,155 +175,302 @@ const MakePayment = () => {
         if (parseFloat(await makePayments[0].total_balance) === payment) {
           await API.minPayment({
             id: id,
-            total_balance:
-              parseFloat(await makePayments[0].total_balance) - payment,
+            total_balance: parseFloat(await makePayments[0].total_balance) - payment,
             minimum_payment: 0,
             statement_balance: 0,
           })
-          .then(alert("Thank You For Your Payment!"))
-          .then(()=>{navigate("/dashboard")})
-          .catch((err) => console.log(err.response.data));
+          .then(() => {
+            alert("Thank You For Your Payment!");
+            navigate("/dashboard");
+          })
+          .catch((err) => console.log(err.response?.data || err));
         } else {
-          alert(
-            "You can only Pay the Full Amount, If you want to make a custom payment please choose the 'Pay Other Amount' option"
-          );
+          alert("You can only pay the full amount. For custom payments, please choose 'Pay Other Amount'");
         }
         break;
 
       case "other_amount":
-        if (
-          payment > 0 &&
-          payment <= parseFloat(await makePayments[0].total_balance)
-        ) {
+        if (payment > 0 && payment <= parseFloat(await makePayments[0].total_balance)) {
           await API.minPayment({
             id: id,
-            total_balance:
-              parseFloat(await makePayments[0].total_balance) - payment,
+            total_balance: parseFloat(await makePayments[0].total_balance) - payment,
           })
-          .then(alert("Thank You For Your Payment!"))
-          .then(()=>{navigate("/dashboard")})
-          .catch((err) => console.log(err.response.data));
+          .then(() => {
+            alert("Thank You For Your Payment!");
+            navigate("/dashboard");
+          })
+          .catch((err) => console.log(err.response?.data || err));
         } else {
-          alert("Please pay up to to the Total Amount only! ");
+          alert("Please enter an amount up to your total balance only!");
         }
         break;
       default:
-        alert("Please choose a Payment Option");
+        alert("Please choose a payment option");
     }
   };
+
+  const handleBackClick = () => {
+    navigate("/dashboard");
+  };
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
-    <div>
-      {makePayments ? (
-        makePayments.map((bal, i) => (
-          <div className="payment-container" key={i}>
-            <div className="payment-title">
-              <span className="pay-title-label">Pay Your Bill</span>
-            </div>
+    <ThemeProvider theme={theme}>
+      <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', py: 4 }}>
+        <Container maxWidth="md">
+          {/* Back Button */}
+          <Button
+            startIcon={<ArrowBack />}
+            onClick={handleBackClick}
+            sx={{ mb: 3, color: 'primary.main' }}
+          >
+            Back to Dashboard
+          </Button>
 
-            <div className="payment-message">
-              <div className="payment-icon">
-                {/* <FaCircleCheck /> */}
-                <FaCircleExclamation />
-              </div>
-              <span className="pay-message-label">
-                Please Choose a Payment Below !
-              </span>
-            </div>
+          {makePayments ? (
+            makePayments.map((bal, i) => (
+              <Stack spacing={3} key={i}>
+                {/* Header Card */}
+                <Card elevation={3}>
+                  <CardContent sx={{ textAlign: 'center', py: 4 }}>
+                    <Typography variant="h4" color="primary" gutterBottom sx={{ fontWeight: 'bold' }}>
+                      Pay Your Bill
+                    </Typography>
+                    <Typography variant="body1" color="text.secondary">
+                      Make a secure payment to your account
+                    </Typography>
+                  </CardContent>
+                </Card>
 
-            <div className="payment-method">
-              <div className="payment-method-title"> Bank Account</div>
-              <div className="payment-entity-label">
-                Instant Bank Personal Checking -8976
-              </div>
+                {/* Alert Message */}
+                <Alert 
+                  severity="info" 
+                  icon={<Info />}
+                  sx={{ 
+                    borderRadius: 2,
+                    '& .MuiAlert-message': {
+                      width: '100%'
+                    }
+                  }}
+                >
+                  <Typography variant="body1" fontWeight="medium">
+                    Please choose a payment option below!
+                  </Typography>
+                </Alert>
 
-              <div className="payment-amount-title">Amount</div>
-              <div className="form">
-                <form className="payment-form" onSubmit={handleSubmit}>
-                  <div>
-                    <input
-                      type="radio"
-                      name="option"
-                      className="minimum"
-                      value="minimum_payment"
-                      checked={formData.option === "minimum_payment"}
-                      onChange={handleOnChange}
-                    />
-                    <label className="minimum-label">
-                      Minimun Payment Due
-                      <span className="minimum-amount-label">
-                        ${bal.minimum_payment.toFixed(2)}
-                      </span>
-                    </label>
-                  </div>
+                {/* Payment Method Card */}
+                <Card elevation={2}>
+                  <CardContent>
+                    <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
+                      <AccountBalance color="primary" />
+                      Payment Method
+                    </Typography>
+                    
+                    <Paper 
+                      variant="outlined" 
+                      sx={{ 
+                        p: 2, 
+                        bgcolor: 'grey.50',
+                        borderRadius: 2,
+                        mb: 3
+                      }}
+                    >
+                      <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+                        Bank Account
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        Instant Bank Personal Checking -8976
+                      </Typography>
+                    </Paper>
 
-                  <div>
-                    <input
-                      type="radio"
-                      name="option"
-                      className="remaining"
-                      value="statement_balance"
-                      checked={formData.option === "statement_balance"}
-                      onChange={handleOnChange}
-                    />
-                    <label className="remaining-label">
-                      Pay Statement Balance
-                      <span className="remaining-amount-label">
-                        ${bal.statement_balance.toFixed(2)}
-                      </span>
-                    </label>
-                  </div>
+                    <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+                      <Payment color="primary" />
+                      Payment Amount
+                    </Typography>
 
-                  <div>
-                    <input
-                      type="radio"
-                      name="option"
-                      className="total"
-                      value="total_balance"
-                      checked={formData.option === "total_balance"}
-                      onChange={handleOnChange}
-                    />
-                    <label className="total-label">
-                      Pay Total Balance
-                      <span className="total-amount-label">
-                        ${bal.total_balance.toFixed(2)}
-                      </span>
-                    </label>
-                  </div>
-                  <div className="other-input">
-                    <input
-                      type="radio"
-                      name="option"
-                      value="other_amount"
-                      checked={formData.option === "other_amount"}
-                      onChange={handleOnChange}
-                    />
-
-                    <label className="other-label">Pay Other Amount</label>
-
-                    <div className="dollar-input-container">
-                      <span className="dollar-sign">$</span>
-                      <input
-                        type="text"
-                        id="dollarInput"
+                    <FormControl component="form" onSubmit={handleSubmit} fullWidth>
+                      <RadioGroup
+                        name="option"
+                        value={formData.option}
                         onChange={handleOnChange}
-                        className="dollar-input "
-                        name="payment"
-                        autoFocus={true}
-                        value={formData.payment}
-                      />
-                    </div>
-                  </div>
+                      >
+                        {/* Minimum Payment */}
+                        <FormControlLabel
+                          value="minimum_payment"
+                          control={<Radio color="primary" />}
+                          label={
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                              <Typography variant="body1" fontWeight="medium">
+                                Minimum Payment Due
+                              </Typography>
+                              <Typography variant="body1" color="primary" fontWeight="bold">
+                                ${bal.minimum_payment.toFixed(2)}
+                              </Typography>
+                            </Box>
+                          }
+                          sx={{ 
+                            mb: 2,
+                            p: 2,
+                            border: '1px solid',
+                            borderColor: formData.option === 'minimum_payment' ? 'primary.main' : 'grey.300',
+                            borderRadius: 2,
+                            backgroundColor: formData.option === 'minimum_payment' ? 'primary.light' : 'transparent',
+                            color: formData.option === 'minimum_payment' ? 'white' : 'inherit',
+                            '& .MuiTypography-root': {
+                              color: formData.option === 'minimum_payment' ? 'white' : 'inherit'
+                            }
+                          }}
+                        />
 
-                  <button className="pay-now btn btn-primary">Pay Now</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        ))
-      ) : (
-        <Loading />
-      )}
-    </div>
+                        {/* Statement Balance */}
+                        <FormControlLabel
+                          value="statement_balance"
+                          control={<Radio color="primary" />}
+                          label={
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                              <Typography variant="body1" fontWeight="medium">
+                                Pay Statement Balance
+                              </Typography>
+                              <Typography variant="body1" color="primary" fontWeight="bold">
+                                ${bal.statement_balance.toFixed(2)}
+                              </Typography>
+                            </Box>
+                          }
+                          sx={{ 
+                            mb: 2,
+                            p: 2,
+                            border: '1px solid',
+                            borderColor: formData.option === 'statement_balance' ? 'primary.main' : 'grey.300',
+                            borderRadius: 2,
+                            backgroundColor: formData.option === 'statement_balance' ? 'primary.light' : 'transparent',
+                            color: formData.option === 'statement_balance' ? 'white' : 'inherit',
+                            '& .MuiTypography-root': {
+                              color: formData.option === 'statement_balance' ? 'white' : 'inherit'
+                            }
+                          }}
+                        />
+
+                        {/* Total Balance */}
+                        <FormControlLabel
+                          value="total_balance"
+                          control={<Radio color="primary" />}
+                          label={
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                              <Typography variant="body1" fontWeight="medium">
+                                Pay Total Balance
+                              </Typography>
+                              <Typography variant="body1" color="primary" fontWeight="bold">
+                                ${bal.total_balance.toFixed(2)}
+                              </Typography>
+                            </Box>
+                          }
+                          sx={{ 
+                            mb: 2,
+                            p: 2,
+                            border: '1px solid',
+                            borderColor: formData.option === 'total_balance' ? 'primary.main' : 'grey.300',
+                            borderRadius: 2,
+                            backgroundColor: formData.option === 'total_balance' ? 'primary.light' : 'transparent',
+                            color: formData.option === 'total_balance' ? 'white' : 'inherit',
+                            '& .MuiTypography-root': {
+                              color: formData.option === 'total_balance' ? 'white' : 'inherit'
+                            }
+                          }}
+                        />
+
+                        {/* Other Amount */}
+                        <FormControlLabel
+                          value="other_amount"
+                          control={<Radio color="primary" />}
+                          label={
+                            <Typography variant="body1" fontWeight="medium">
+                              Pay Other Amount
+                            </Typography>
+                          }
+                          sx={{ 
+                            mb: 2,
+                            p: 2,
+                            border: '1px solid',
+                            borderColor: formData.option === 'other_amount' ? 'primary.main' : 'grey.300',
+                            borderRadius: 2,
+                            backgroundColor: formData.option === 'other_amount' ? 'primary.light' : 'transparent',
+                            color: formData.option === 'other_amount' ? 'white' : 'inherit'
+                          }}
+                        />
+                      </RadioGroup>
+
+                      {/* Other Amount Input */}
+                      {formData.option === 'other_amount' && (
+                        <TextField
+                          fullWidth
+                          name="payment"
+                          value={formData.payment}
+                          onChange={handleOnChange}
+                          placeholder="0.00"
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <Typography variant="h6" color="text.primary">$</Typography>
+                              </InputAdornment>
+                            ),
+                          }}
+                          sx={{ 
+                            mb: 3,
+                            '& .MuiOutlinedInput-root': {
+                              borderRadius: 2,
+                              fontSize: '1.1rem',
+                              fontWeight: 'bold'
+                            }
+                          }}
+                        />
+                      )}
+
+                      {/* Submit Button */}
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        size="large"
+                        fullWidth
+                        disabled={processing}
+                        startIcon={processing ? <CircularProgress size={20} /> : <Security />}
+                        sx={{
+                          py: 2,
+                          borderRadius: 2,
+                          fontSize: '1.1rem',
+                          fontWeight: 'bold',
+                          bgcolor: 'secondary.main',
+                          '&:hover': {
+                            bgcolor: 'secondary.dark'
+                          }
+                        }}
+                      >
+                        {processing ? 'Processing Payment...' : 'Pay Now Securely'}
+                      </Button>
+                    </FormControl>
+                  </CardContent>
+                </Card>
+
+                {/* Security Notice */}
+                <Alert 
+                  severity="success" 
+                  icon={<CheckCircle />}
+                  sx={{ borderRadius: 2 }}
+                >
+                  <Typography variant="body2">
+                    Your payment is secure and encrypted. All transactions are protected.
+                  </Typography>
+                </Alert>
+              </Stack>
+            ))
+          ) : (
+            <Loading />
+          )}
+        </Container>
+      </Box>
+    </ThemeProvider>
   );
 };
 
