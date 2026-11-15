@@ -18,3 +18,7 @@ A React, Express, Node.js, and MongoDB demo of a cardholder portal. Each browser
 - Save card freeze, AutoPay, and alert preferences. The demo does not schedule payments, deliver alerts, or communicate with a card issuer.
 
 Production hosting needs Node.js 22, the `MONGODB_URI` environment variable, a build command of `npm run build`, and a start command of `npm run start:prod`. The build never seeds or resets an existing database. Demo portfolios use the separate `paymentCenterDemoV3` collection.
+
+## SDET lab
+
+See [SDET-LAB.md](SDET-LAB.md) for the Jenkins pipeline, local verification, and scenario walkthroughs.
