@@ -1,6 +1,6 @@
 # Payment Center
 
-A React, Express, Node.js, and MongoDB demo of a cardholder portal. Each browser receives its own fictional portfolio with two cards, 38 activity entries per card, and three reconciled statement periods per card. The portfolio lives in MongoDB and is associated with a 30-day HTTP-only cookie. It does not require account sign-in or real financial data.
+A React, Express, Node.js, and MongoDB demo of a cardholder portal. Jordan signs in with jordan@example.com and the demo password JordanDemo!2026. His persistent MongoDB account contains two cards, 38 activity entries per card, and three reconciled statement periods per card. Sessions expire after eight hours and logout revokes the session in MongoDB. Set JORDAN_DEMO_PASSWORD in the server environment to replace the default demo password. The login screen displays the default credentials for demonstration.
 
 ## Run locally
 
@@ -18,3 +18,10 @@ A React, Express, Node.js, and MongoDB demo of a cardholder portal. Each browser
 - Save card freeze, AutoPay, and alert preferences. The demo does not schedule payments, deliver alerts, or communicate with a card issuer.
 
 Production hosting needs Node.js 22, the `MONGODB_URI` environment variable, a build command of `npm run build`, and a start command of `npm run start:prod`. The build never seeds or resets an existing database. Demo portfolios use the separate `paymentCenterDemoV3` collection.
+
+
+## Authentication
+
+Open /login and sign in to reach /dashboard. Anonymous API requests return 401. POST /api/auth/login accepts email and password, GET /api/auth/me returns the signed-in user, and POST /api/auth/logout revokes the session. Passwords are hashed with salted scrypt. MongoDB stores hashes of opaque session tokens. Existing browser demo portfolios remain in their original collection. Jordan uses a separate stable account record.
+
+Run the focused authentication regression check with node --test auth.test.js. Existing Playwright tests must sign in before accessing the portfolio or making account changes. Tests that change Jordan’s account share his data and should run sequentially or use separate test accounts.
