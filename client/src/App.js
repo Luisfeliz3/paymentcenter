@@ -13,7 +13,11 @@ async function request(path, method = "GET", data) {
   });
   if (!result.headers.get("content-type")?.includes("application/json")) throw new Error("Could not reach Payment Center.");
   const body = await result.json();
-  if (!result.ok) throw new Error(body.error);
+  if (!result.ok) {
+    const error = new Error(body.error);
+    error.status = result.status;
+    throw error;
+  }
   return body;
 }
 
@@ -163,7 +167,39 @@ function Payment({ card, save, busy }) {
   </section></>;
 }
 
+function Login({ onLogin }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  async function submit(event) {
+    event.preventDefault();
+    setBusy(true);
+    setError("");
+    try {
+      await request("auth/login", "POST", { email, password });
+      await onLogin();
+    } catch (err) { setError(err.message); }
+    finally { setBusy(false); }
+  }
+  return <section className="panel login-panel">
+    <h1>Sign in to your account</h1>
+    <p className="muted">Welcome to Payment Center. Access your cards, payments, and account activity.</p>
+    <form onSubmit={submit}>
+      <label>Email address<input type="email" autoComplete="username" required value={email} onChange={e => setEmail(e.target.value)} /></label>
+      <label>Password<input type="password" autoComplete="current-password" required value={password} onChange={e => setPassword(e.target.value)} /></label>
+      {error && <p className="error" role="alert">{error}</p>}
+      <button className="primary" disabled={busy}>{busy ? "Signing in…" : "Sign in"}</button>
+    </form>
+    <details className="demo-credentials"><summary>Jordan’s demo login</summary>
+      <p>Email · jordan@example.com</p><p>Password · JordanDemo!2026</p>
+    </details>
+  </section>;
+}
+
 function Center() {
+  const navigate = useNavigate();
+  const [checking, setChecking] = useState(true);
   const [portfolio, setPortfolio] = useState(null);
   const [key, setKey] = useState("everyday");
   const [modal, setModal] = useState(null);
@@ -179,8 +215,11 @@ function Center() {
     loading.current = true;
     setError("");
     try { setPortfolio(await request("portfolio")); }
-    catch (err) { setError(err.message); }
-    finally { loading.current = false; }
+    catch (err) {
+      if (err.status === 401) { setPortfolio(null); navigate("/login", { replace: true }); }
+      else setError(err.message);
+    }
+    finally { loading.current = false; setChecking(false); }
   }
   useEffect(() => { load(); }, []);
   function select(type, tx) {
@@ -201,11 +240,27 @@ function Center() {
       return true;
     } catch (err) {
       setError(err.message);
+      if (err.status === 401) { setPortfolio(null); setModal(null); navigate("/login", { replace: true }); }
       return false;
     } finally {
       inFlight.current = false;
       setBusy(false);
     }
+  }
+  async function logout() {
+    if (busy) return;
+    setBusy(true);
+    try {
+      await request("auth/logout", "POST", {});
+      setPortfolio(null); setModal(null); setNotice(""); setError(""); setKey("everyday");
+      navigate("/login", { replace: true });
+    } catch (err) { setError(err.message); }
+    finally { setBusy(false); }
+  }
+  async function signedIn() {
+    const data = await request("portfolio");
+    setPortfolio(data); setNotice(""); setError("");
+    navigate("/dashboard", { replace: true });
   }
   const close = () => { if (!busy) { setModal(null); setError(""); } };
   const disputed = modal?.tx && card.disputes.find(item => item.transactionId === modal.tx.id);
@@ -216,15 +271,20 @@ function Center() {
   }
   return <>
     <header><div className="shell masthead"><NavLink to="/dashboard" className="brand"><span aria-hidden="true">▰</span> Payment Center</NavLink>
-      <span className="demo-label">Demo account</span></div></header>
-    <nav className="nav" aria-label="Account"><div className="shell">{links.map(([href, label]) => <NavLink key={href} to={href}>{label}</NavLink>)}</div></nav>
+      <div className="account-menu"><span className="demo-label">{portfolio ? portfolio.name : "Demo account"}</span>
+        {portfolio && <button className="secondary" onClick={logout} disabled={busy}>Sign out</button>}</div></div></header>
+    {portfolio && <nav className="nav" aria-label="Account"><div className="shell">{links.map(([href, label]) => <NavLink key={href} to={href}>{label}</NavLink>)}</div></nav>}
     <main className="shell">
       {portfolio && <label className="card-picker">Selected card<select value={key} disabled={busy} onChange={e => {
         setKey(e.target.value); setError(""); setNotice(""); setModal(null);
       }}>{Object.values(portfolio.cards).map(item => <option value={item.key} key={item.key}>{item.name} · •••• {item.last4}</option>)}</select></label>}
       {notice && <p className="notice" role="status">{notice}</p>}
       {error && !modal && <p className="error" role="alert">{error}</p>}
-      {!card && (error ? <button className="primary" onClick={load}>Retry connection</button> : <p role="status">Loading your account…</p>)}
+      {checking && <p role="status">Checking your session…</p>}
+      {!checking && !card && <Routes>
+        <Route path="/login" element={<Login onLogin={signedIn} />} />
+        <Route path="*" element={<Navigate replace to="/login" />} />
+      </Routes>}
       {card && <Routes>
         <Route path="/dashboard" element={<Overview card={card} name={portfolio.name} select={select} />} />
         <Route path="/payment" element={<Payment key={key} card={card} save={save} busy={busy} />} />
@@ -247,7 +307,7 @@ function Center() {
       </Routes>}
     </main>
     <footer className="shell"><NavLink to="/disputes">Disputes</NavLink><span>Fictional accounts and simulated payments</span></footer>
-    {modal && <AccountDialog modal={modal} close={close}>
+    {modal && card && <AccountDialog modal={modal} close={close}>
       {modal.type === "transaction" ? <>
         <dl><dt>Merchant</dt><dd>{modal.tx.merchant}</dd><dt>Amount</dt><dd>{money(modal.tx.amount)}</dd>
           <dt>Date</dt><dd>{date(modal.tx.date)}</dd><dt>Status</dt><dd>{modal.tx.status}</dd></dl>
@@ -268,3 +328,4 @@ function Center() {
 export default function App() {
   return <BrowserRouter><Center /></BrowserRouter>;
 }
+
