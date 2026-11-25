@@ -1,7 +1,7 @@
 try { process.loadEnvFile(); } catch (error) { if (error.code !== "ENOENT") throw error; }
 import express from "express";
 import mongoose from "mongoose";
-import { randomUUID } from "node:crypto";
+import { installAuth } from "./auth.js";
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { demoPortfolio } from "./portfolio.js";
@@ -28,25 +28,14 @@ api.use((req, res, next) => {
 });
 
 const read = id => portfolios.findOne({ _id: id }, { projection: { _id: 0 } });
-const sessionId = req => /(?:^|;\s*)pc_demo_v3=([a-f0-9-]+)(?:;|$)/.exec(req.headers.cookie || "")?.[1];
+await installAuth(api, mongoose.connection, portfolios, demoPortfolio, asyncRoute);
 
 api.get("/portfolio", asyncRoute(async (req, res) => {
-  const cookie = sessionId(req);
-  const existing = cookie && uuid.test(cookie) && await read(cookie);
-  if (existing) return res.json(existing);
-  const id = randomUUID();
-  const { _id, ...portfolio } = demoPortfolio(id);
-  await portfolios.insertOne({ _id, ...portfolio });
-  res.cookie("pc_demo_v3", id, {
-    httpOnly: true, sameSite: "strict", secure: req.secure || process.env.RENDER === "true",
-    maxAge: 30 * 86400000,
-  });
-  res.json(portfolio);
+  res.json(await read(req.accountId));
 }));
 
 const mutate = handler => asyncRoute(async (req, res) => {
-  const id = sessionId(req);
-  if (!id || !uuid.test(id)) return res.status(401).json({ error: "Reload to start a demo session." });
+  const id = req.accountId;
   if (!["everyday", "travel"].includes(req.params.card)) return res.status(404).json({ error: "Card not found." });
   const prefix = "cards." + req.params.card + ".";
   const result = await handler(req.body || {}, prefix, id);
@@ -119,3 +108,4 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: "Payment Center could not complete this request." });
 });
 app.listen(port, () => console.log("Payment Center listening on port", port));
+
