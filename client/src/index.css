@@ -75,3 +75,12 @@ footer { border-top: 1px solid #d9e3ef; padding-block: 16px 23px; color: #4c6279
 @media (max-width: 380px) {
   .card-art { display: none; }
 }
+
+
+.account-menu { display: flex; align-items: center; gap: 12px; }
+.login-panel { max-width: 480px; margin: 36px auto; padding: 30px; }
+.login-panel h1 { font-size: 1.9rem; margin-bottom: 12px; }
+.login-panel form { margin-top: 24px; }
+.demo-credentials { margin-top: 24px; color: #4c6279; font-size: .9rem; }
+.demo-credentials summary { cursor: pointer; }
+.demo-credentials p { margin-top: 8px; overflow-wrap: anywhere; }
